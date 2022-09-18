@@ -1,0 +1,1542 @@
+<!DOCTYPE html><html><style type="text/css">
+    #allrecords {
+    overflow: visible !important;
+    z-index: 99;
+    position: relative;
+    }
+    html {
+    scroll-behavior: smooth;
+    }
+    </style> 
+        <link rel="shortcut icon" href="icon.ico" type="image/x-icon">
+    <!-- preloader -->
+
+<div class="preloader" id="preloader">
+    <main>
+      <svg class="ap" viewBox="0 0 128 256" width="128px" height="256px" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="ap-grad1" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="hsl(223,90%,55%)" />
+            <stop offset="100%" stop-color="hsl(253,90%,55%)" />
+          </linearGradient>
+          <linearGradient id="ap-grad2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="hsl(193,90%,55%)" />
+            <stop offset="50%" stop-color="hsl(223,90%,55%)" />
+            <stop offset="100%" stop-color="hsl(253,90%,55%)" />
+          </linearGradient>
+        </defs>
+        <circle class="ap__ring" r="56" cx="64" cy="192" fill="none" stroke="#ddd" stroke-width="16" stroke-linecap="round" />
+        <circle class="ap__worm1" r="56" cx="64" cy="192" fill="none" stroke="url(#ap-grad1)" stroke-width="16" stroke-linecap="round" stroke-dasharray="87.96 263.89" />
+        <path class="ap__worm2" d="M120,192A56,56,0,0,1,8,192C8,161.07,16,8,64,8S120,161.07,120,192Z" fill="none" stroke="url(#ap-grad2)" stroke-width="16" stroke-linecap="round" stroke-dasharray="87.96 494" />
+      </svg>
+    </main>
+    
+</div>
+  
+  <script>
+    window.onload = function() {
+    let preloader = document.getElementById('preloader');
+    preloader.classList.add('hide-preloader');
+    setInterval(function() {
+          preloader.classList.add('preloader-hidden');
+    }, 990);
+    
+    }
+  </script>
+  
+  <style>
+
+body {
+        place-items: center;
+        transition: background-color 0.3s;
+    }
+    main {
+        padding: 1.5em 0;
+    }
+    
+    .ap {
+        width: 8em;
+        height: 16em;
+    }
+    .ap__ring {
+        stroke: hsla(var(--hue),10%,10%,0.15);
+        transition: stroke 0.3s;
+    }
+    .ap__worm1,
+    .ap__worm2 {
+        animation-duration: 3s;
+        animation-iteration-count: infinite;
+    }
+    .ap__worm1 {
+        animation-name: worm1;
+    }
+    .ap__worm2 {
+        animation-name: worm2;
+        visibility: hidden;
+    }
+    
+    /* Dark theme */
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --bg: hsl(var(--hue),10%,10%);
+            --fg: hsl(var(--hue),10%,90%);
+        }
+        .ap__ring {
+            stroke: hsla(var(--hue),10%,90%,0.1);
+        }
+    }
+    
+    /* Animtions */
+    @keyframes worm1 {
+        from {
+            animation-timing-function: ease-in-out;
+            stroke-dashoffset: -87.96;
+        }
+        20% {
+            animation-timing-function: ease-in;
+            stroke-dashoffset: 0;
+        }
+        60% {
+            stroke-dashoffset: -791.68;
+            visibility: visible;
+        }
+        60.1%,
+        to {
+            stroke-dashoffset: -791.68;
+            visibility: hidden;
+        }
+    }
+    @keyframes worm2 {
+        from,
+        60% {
+            stroke-dashoffset: -87.96;
+            visibility: hidden;
+        }
+        60.1% {
+            animation-timing-function: cubic-bezier(0,0,0.5,0.75);
+            stroke-dashoffset: -87.96;
+            visibility: visible;
+        }
+        77% {
+            animation-timing-function: cubic-bezier(0.5,0.25,0.5,0.88);
+            stroke-dashoffset: -340;
+            visibility: visible;
+        }
+        to {
+            stroke-dashoffset: -669.92;
+            visibility: visible;
+        }
+    }
+    
+  #preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1C1C1C;
+  z-index: 999;
+  }
+  #preloader.hide-preloader {
+  animation: hidePreloader 1s;
+  }
+  
+  #preloader.preloader-hidden {
+  display: none;
+  }
+  
+  @keyframes hidePreloader {
+  0% {
+      opacity: 1;
+  }
+  100% {
+      opacity: 0;
+  }
+  }
+  
+  
+  </style>
+  
+  <!-- /preloader -->
+    
+    <head><meta charset="utf-8"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><!--metatextblock--><title>Live Schedule</title><meta property="og:url" content="http://live-schedule.tilda.ws/schedule"><meta property="og:title" content="Live Schedule"><meta property="og:description" content=""><meta property="og:type" content="website"><link rel="canonical" href="schedule.html"><!--/metatextblock--><meta property="fb:app_id" content="257953674358265"><meta name="format-detection" content="telephone=no"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="dns-prefetch" href="https://ws.tildacdn.com"><link rel="dns-prefetch" href="https://static.tildacdn.info"><meta name="robots" content="nofollow"><link rel="shortcut icon" href="img/tildafavicon.ico" type="image/x-icon"><!-- Assets --><script src="js/tilda-fallback-1.0.min.js" charset="utf-8" async=""></script><link rel="stylesheet" href="css/tilda-grid-3.0.min.css" type="text/css" media="all" onerror="this.loaderr='y';"><link rel="stylesheet" href="tilda-blocks-page29774318.min.css?t=1662844186" type="text/css" media="all" onerror="this.loaderr='y';"><link rel="stylesheet" href="css/tilda-animation-1.0.min.css" type="text/css" media="all" onerror="this.loaderr='y';"><script type="text/javascript">function t_onReady(func) {
+if (document.readyState != 'loading') {
+func();
+} else {
+document.addEventListener('DOMContentLoaded', func);
+}
+}
+function t_onFuncLoad(funcName, okFunc, time) {
+if (typeof window[funcName] === 'function') {
+okFunc();
+} else {
+setTimeout(function() {
+t_onFuncLoad(funcName, okFunc, time);
+},(time || 100));
+}
+}</script><script src="js/jquery-1.10.2.min.js" onerror="this.loaderr='y';"></script><script src="js/tilda-scripts-3.0.min.js" onerror="this.loaderr='y';"></script><script src="tilda-blocks-page29774318.min.js?t=1662844186" onerror="this.loaderr='y';"></script><script src="js/lazyload-1.3.min.js" charset="utf-8" async="" onerror="this.loaderr='y';"></script><script src="js/tilda-animation-1.0.min.js" charset="utf-8" async="" onerror="this.loaderr='y';"></script><script src="js/tilda-zero-1.0.min.js" charset="utf-8" defer="" onerror="this.loaderr='y';"></script><script src="js/tilda-events-1.0.min.js" charset="utf-8" async="" onerror="this.loaderr='y';"></script><script src="js/tilda-animation-sbs-1.0.min.js" charset="utf-8" async="" onerror="this.loaderr='y';"></script><script type="text/javascript">window.dataLayer = window.dataLayer || [];</script><script type="text/javascript">(function () {
+if((/bot|google|yandex|baidu|bing|msn|duckduckbot|teoma|slurp|crawler|spider|robot|crawling|facebook/i.test(navigator.userAgent))===false && typeof(sessionStorage)!='undefined' && sessionStorage.getItem('visited')!=='y' && document.visibilityState){
+var style=document.createElement('style');
+style.type='text/css';
+style.innerHTML='@media screen and (min-width: 980px) {.t-records {opacity: 0;}.t-records_animated {-webkit-transition: opacity ease-in-out .2s;-moz-transition: opacity ease-in-out .2s;-o-transition: opacity ease-in-out .2s;transition: opacity ease-in-out .2s;}.t-records.t-records_visible {opacity: 1;}}';
+document.getElementsByTagName('head')[0].appendChild(style);
+function t_setvisRecs(){
+var alr=document.querySelectorAll('.t-records');
+Array.prototype.forEach.call(alr, function(el) {
+el.classList.add("t-records_animated");
+});
+setTimeout(function () {
+Array.prototype.forEach.call(alr, function(el) {
+el.classList.add("t-records_visible");
+});
+sessionStorage.setItem("visited", "y");
+}, 400);
+} 
+document.addEventListener('DOMContentLoaded', t_setvisRecs);
+}
+})();</script></head><body class="t-body" style="margin:0;"><!--allrecords--><div id="allrecords" class="t-records" data-hook="blocks-collection-content-node" data-tilda-project-id="5958866" data-tilda-page-id="29774318" data-tilda-page-alias="schedule" data-tilda-formskey="094102ada6a891a4e03e9f5f15958866" data-tilda-lazy="yes"><div id="rec481668047" class="r t-rec" style=" " data-animationappear="off" data-record-type="396"><!-- T396 --><style>#rec481668047 .t396__artboard{min-height: 550px;height: 100vh; background-color: #1c1c1c;}#rec481668047 .t396__filter{min-height: 550px;height: 100vh;}#rec481668047 .t396__carrier{min-height: 550px;height: 100vh;background-position: center center;background-attachment: scroll;background-size:cover;background-repeat:no-repeat;}@media screen and (max-width: 1199px){#rec481668047 .t396__artboard{}#rec481668047 .t396__filter{}#rec481668047 .t396__carrier{background-attachment:scroll;}}@media screen and (max-width: 959px){#rec481668047 .t396__artboard{min-height: 550px;}#rec481668047 .t396__filter{min-height: 550px;}#rec481668047 .t396__carrier{min-height: 550px;}}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .t396__artboard{min-height: 950px;}#rec481668047 .t396__filter{min-height: 950px;}#rec481668047 .t396__carrier{min-height: 950px;}}#rec481668047 .tn-elem[data-elem-id="1660967273501"]{z-index:4;top: 3152px;left: calc(50% - 20px + -1204px);width:40px;height:40px;}#rec481668047 .tn-elem[data-elem-id="1660967273501"] .tn-atom{background-position:center center;background-size:cover;background-repeat:no-repeat;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660967273501"]{top: 32px;left: calc(50% - 15px + 133px);width:30px;height:30px;}#rec481668047 .tn-elem[data-elem-id="1660967273501"] .tn-atom{-webkit-transform:rotate(0deg); -moz-transform:rotate(0deg); transform:rotate(0deg);}}#rec481668047 .tn-elem[data-elem-id="1660967385484"]{color:#ffffff;text-align:center;z-index:6;top: 3180px;left: calc(50% - 18px + -1094px);width:36px;}#rec481668047 .tn-elem[data-elem-id="1660967385484"] .tn-atom{color:#ffffff;font-size:16px;font-family:'SFPlus',Arial,sans-serif;line-height:1.55;font-weight:600;background-position:center center;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660967385484"]{top: 135px;left: calc(50% - 33.5px + -97px);width:67px;}}#rec481668047 .tn-elem[data-elem-id="1660967338116"]{z-index:5;top: 3142px;left: calc(50% - 50px + -1094px);width:100px;height:100px;}#rec481668047 .tn-elem[data-elem-id="1660967338116"] .tn-atom{border-radius:3000px;background-position:center center;background-size:cover;background-repeat:no-repeat;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660967338116"]{top: 104px;left: calc(50% - 43px + -98px);width:86px;height:86px;}}#rec481668047 .tn-elem[data-elem-id="1660968079090"]{z-index:3;top: 3156px;left: calc(50% - 214px + -408px);width:428px;height:519px;}#rec481668047 .tn-elem[data-elem-id="1660968079090"] .tn-atom{border-radius:40px;background-color:#ffffff;background-position:center center;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660968079090"]{top: 338px;left: calc(50% - 50px + 0px);width:100px;height:671px;}}#rec481668047 .tn-elem[data-elem-id="1662199227879"]{z-index:2;top: calc(50vh - 275px + 3142px);left: calc(50% - 600px + 34px);width:100px;height:100px;-webkit-filter: blur(0px);filter: blur(0px);}#rec481668047 .tn-elem[data-elem-id="1662199227879"] .tn-atom{background-position:center center;background-size:cover;background-repeat:no-repeat;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1662199227879"]{top: -72px;left: calc(50% - 59px + -2px);width:118px;height:153px;-webkiit-filter: blur(36px);filter: blur(36px);}}#rec481668047 .tn-elem[data-elem-id="1660968835853"]{z-index:9;top: 3155px;left: calc(50% - 39px + -1338px);width:78px;height:36px;}#rec481668047 .tn-elem[data-elem-id="1660968835853"] .tn-atom{background-position:center center;background-size:cover;background-repeat:no-repeat;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660968835853"]{top: 35px;left: calc(50% - 26px + -61px);width:52px;height:24px;}}#rec481668047 .tn-elem[data-elem-id="1661511431833"]{z-index:17;top: 95px;left: calc(50% - 230px + -9px);width:460px;height:460px;}#rec481668047 .tn-elem[data-elem-id="1661511431833"] .tn-atom{background-position:center center;background-size:cover;background-repeat:no-repeat;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){#rec481668047 .tn-elem[data-elem-id="1661511431833"]{top: 95px;left: calc(50% - 230px + 0px);}}@media screen and (max-width: 959px){#rec481668047 .tn-elem[data-elem-id="1661511431833"]{top: 101px;left: calc(50% - 174.5px + 1px);width:349px;height:349px;}}@media screen and (max-width: 639px){#rec481668047 .tn-elem[data-elem-id="1661511431833"]{top: 132px;left: calc(50% - 143.5px + 1px);width:287px;height:287px;}}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1661511431833"]{top: 3328px;left: calc(50% - 143.5px + -975px);}}#rec481668047 .tn-elem[data-elem-id="1660968725394"]{z-index:16;top: 3129px;left: calc(50% - 44.5px + -1384px);width:89px;height:89px;}#rec481668047 .tn-elem[data-elem-id="1660968725394"] .tn-atom{background-position:center center;background-size:cover;background-repeat:no-repeat;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660968725394"]{top: 23px;left: calc(50% - 25.5px + -115px);width:51px;height:49px;}}#rec481668047 .tn-elem[data-elem-id="1660970384171"]{color:#808080;text-align:center;z-index:49;top: 3236px;left: calc(50% - 61px + -549px);width:122px;}#rec481668047 .tn-elem[data-elem-id="1660970384171"] .tn-atom{color:#808080;font-size:16px;font-family:'SFPlus',Arial,sans-serif;line-height:1.55;font-weight:500;background-position:center center;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660970384171"]{top: 388px;left: calc(50% - 86px + -55px);width:172px;}#rec481668047 .tn-elem[data-elem-id="1660970384171"]{text-align:left;}#rec481668047 .tn-elem[data-elem-id="1660970384171"] .tn-atom{font-size:14px;}}#rec481668047 .tn-elem[data-elem-id="1660970303001"]{color:#1c1c1c;text-align:center;z-index:48;top: 3192px;left: calc(50% - 113.5px + -496px);width:227px;}#rec481668047 .tn-elem[data-elem-id="1660970303001"] .tn-atom{color:#1c1c1c;font-size:30px;font-family:'SFPlus',Arial,sans-serif;line-height:1.55;font-weight:700;background-position:center center;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660970303001"]{top: 359px;left: calc(50% - 87px + -54px);width:174px;}#rec481668047 .tn-elem[data-elem-id="1660970303001"]{color:#1c1c1c;text-align:left;}#rec481668047 .tn-elem[data-elem-id="1660970303001"] .tn-atom{color:#1c1c1c;font-size:21px;}}#rec481668047 .tn-elem[data-elem-id="1660984287973"]{color:#f4f4f4;z-index:52;top: calc(50vh - 275px + 3167px);left: calc(50% - 600px + 306px);width:72px;}#rec481668047 .tn-elem[data-elem-id="1660984287973"] .tn-atom{color:#f4f4f4;font-size:14px;font-family:'SFPlus',Arial,sans-serif;line-height:1.55;font-weight:400;background-position:center center;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660984287973"]{top: calc(368px);left: calc(50% - 160px + 246px);width:58px;}#rec481668047 .tn-elem[data-elem-id="1660984287973"] .tn-atom{font-size:13px;}}#rec481668047 .tn-elem[data-elem-id="1660984214912"]{z-index:51;top: 3219px;left: calc(50% - 9px + -311px);width:18px;height:18px;}#rec481668047 .tn-elem[data-elem-id="1660984214912"] .tn-atom{background-position:center center;background-size:cover;background-repeat:no-repeat;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660984214912"]{top: 370px;left: calc(50% - 8px + 71px);width:16px;height:16px;}}#rec481668047 .tn-elem[data-elem-id="1660984152288"]{z-index:50;top: 3209px;left: calc(50% - 52px + -282px);width:104px;height:42px;}#rec481668047 .tn-elem[data-elem-id="1660984152288"] .tn-atom{border-radius:30px;background-color:#1c1c1c;background-position:center center;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660984152288"]{top: 359px;left: calc(50% - 49px + 99px);width:98px;height:38px;}}#rec481668047 .tn-elem[data-elem-id="1660967515003"]{color:#a7a7a7;z-index:8;top: 3206px;left: calc(50% - 86px + -944px);width:172px;}#rec481668047 .tn-elem[data-elem-id="1660967515003"] .tn-atom{color:#a7a7a7;font-size:14px;font-family:'SFPlus',Arial,sans-serif;line-height:1.55;font-weight:500;background-position:center center;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660967515003"]{top: 155px;left: calc(50% - 86px + 47px);}}#rec481668047 .tn-elem[data-elem-id="1660967441016"]{color:#ffffff;z-index:7;top: 3154px;left: calc(50% - 67.5px + -962px);width:135px;}#rec481668047 .tn-elem[data-elem-id="1660967441016"] .tn-atom{color:#ffffff;font-size:16px;font-family:'SFPlus',Arial,sans-serif;line-height:1.55;font-weight:700;background-position:center center;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660967441016"]{top: 117px;left: calc(50% - 62.5px + 24px);width:125px;}#rec481668047 .tn-elem[data-elem-id="1660967441016"] .tn-atom{font-size:14px;line-height:1.35;}}#rec481668047 .tn-elem[data-elem-id="1662839733869"]{z-index:93;top: calc(50vh - 275px + 3236px);left: calc(50% - 600px + 216px);width:70px;height:102px;}#rec481668047 .tn-elem[data-elem-id="1662839733869"] .tn-atom{background-position:center center;background-size:cover;background-repeat:no-repeat;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1662839733869"]{top: 206px;left: calc(50% - 36px + 28px);width:72px;height:100px;}}#rec481668047 .tn-elem[data-elem-id="1662839732354"]{z-index:92;top: calc(50vh - 275px + 3236px);left: calc(50% - 600px + 216px);width:70px;height:102px;}#rec481668047 .tn-elem[data-elem-id="1662839732354"] .tn-atom{background-position:center center;background-size:cover;background-repeat:no-repeat;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1662839732354"]{top: 206px;left: calc(50% - 36px + 142px);width:72px;height:100px;}}#rec481668047 .tn-elem[data-elem-id="1662839770139"]{z-index:91;top: calc(50vh - 275px + 3236px);left: calc(50% - 600px + 216px);width:70px;height:102px;}#rec481668047 .tn-elem[data-elem-id="1662839770139"] .tn-atom{background-position:center center;background-size:cover;background-repeat:no-repeat;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1662839770139"]{top: 206px;left: calc(50% - 36px + 85px);width:72px;height:100px;}}#rec481668047 .tn-elem[data-elem-id="1662839730770"]{z-index:90;top: calc(50vh - 275px + 3236px);left: calc(50% - 600px + 216px);width:70px;height:102px;}#rec481668047 .tn-elem[data-elem-id="1662839730770"] .tn-atom{background-position:center center;background-size:cover;background-repeat:no-repeat;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1662839730770"]{top: 206px;left: calc(50% - 36px + -29px);width:72px;height:100px;}}#rec481668047 .tn-elem[data-elem-id="1662839728009"]{z-index:89;top: calc(50vh - 275px + 3236px);left: calc(50% - 600px + 216px);width:70px;height:102px;}#rec481668047 .tn-elem[data-elem-id="1662839728009"] .tn-atom{background-position:center center;background-size:cover;background-repeat:no-repeat;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1662839728009"]{top: 206px;left: calc(50% - 36px + -143px);width:72px;height:100px;}}#rec481668047 .tn-elem[data-elem-id="1662839619643"]{z-index:88;top: calc(50vh - 275px + 3268px);left: calc(50% - 600px + 74px);width:70px;height:102px;}#rec481668047 .tn-elem[data-elem-id="1662839619643"] .tn-atom{background-position:center center;background-size:cover;background-repeat:no-repeat;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1662839619643"]{top: 206px;left: calc(50% - 36px + -86px);width:72px;height:100px;}}#rec481668047 .tn-elem[data-elem-id="1662318769455"]{z-index:87;top: 3279px;left: calc(50% - 7.5px + -408px);width:15px;height:10px;}#rec481668047 .tn-elem[data-elem-id="1662318769455"] .tn-atom{background-position:center center;background-size:cover;background-repeat:no-repeat;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1662318769455"]{top: 884px;left: calc(50% - 7.5px + 141px);}}#rec481668047 .tn-elem[data-elem-id="1662318769446"]{z-index:86;top: 3269px;left: calc(50% - 7.5px + -418px);width:15px;height:10px;}#rec481668047 .tn-elem[data-elem-id="1662318769446"] .tn-atom{background-position:center center;background-size:cover;background-repeat:no-repeat;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1662318769446"]{top: 812px;left: calc(50% - 7.5px + 141px);}}#rec481668047 .tn-elem[data-elem-id="1662318769436"]{z-index:85;top: 3269px;left: calc(50% - 7.5px + -418px);width:15px;height:10px;}#rec481668047 .tn-elem[data-elem-id="1662318769436"] .tn-atom{background-position:center center;background-size:cover;background-repeat:no-repeat;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1662318769436"]{top: 740px;left: calc(50% - 7.5px + 141px);}}#rec481668047 .tn-elem[data-elem-id="1662318733901"]{z-index:84;top: 3269px;left: calc(50% - 7.5px + -418px);width:15px;height:10px;}#rec481668047 .tn-elem[data-elem-id="1662318733901"] .tn-atom{background-position:center center;background-size:cover;background-repeat:no-repeat;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1662318733901"]{top: 668px;left: calc(50% - 7.5px + 141px);}}#rec481668047 .tn-elem[data-elem-id="1662318733890"]{z-index:83;top: 3259px;left: calc(50% - 7.5px + -428px);width:15px;height:10px;}#rec481668047 .tn-elem[data-elem-id="1662318733890"] .tn-atom{background-position:center center;background-size:cover;background-repeat:no-repeat;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1662318733890"]{top: 596px;left: calc(50% - 7.5px + 141px);}}#rec481668047 .tn-elem[data-elem-id="1662318674333"]{z-index:82;top: 3259px;left: calc(50% - 7.5px + -428px);width:15px;height:10px;}#rec481668047 .tn-elem[data-elem-id="1662318674333"] .tn-atom{background-position:center center;background-size:cover;background-repeat:no-repeat;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1662318674333"]{top: 524px;left: calc(50% - 7.5px + 141px);}}#rec481668047 .tn-elem[data-elem-id="1662318581795"]{z-index:81;top: 3249px;left: calc(50% - 7.5px + -438px);width:15px;height:10px;}#rec481668047 .tn-elem[data-elem-id="1662318581795"] .tn-atom{background-position:center center;background-size:cover;background-repeat:no-repeat;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1662318581795"]{top: 453px;left: calc(50% - 7.5px + 141px);}}#rec481668047 .tn-elem[data-elem-id="1660998589783"]{color:#787878;z-index:80;top: calc(50vh - 275px + 3410px);left: calc(50% - 600px + 30px);width:560px;}#rec481668047 .tn-elem[data-elem-id="1660998589783"] .tn-atom{color:#787878;font-size:20px;font-family:'SFPlus',Arial,sans-serif;line-height:1.55;font-weight:400;background-position:center center;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660998589783"]{top: calc(890px);left: calc(50% - 160px + 102px);width:200px;}#rec481668047 .tn-elem[data-elem-id="1660998589783"]{color:#787878;}#rec481668047 .tn-elem[data-elem-id="1660998589783"] .tn-atom{color:#787878;font-size:13px;}}#rec481668047 .tn-elem[data-elem-id="1660986877929"]{color:#1c1c1c;z-index:79;top: 3374px;left: calc(50% - 56px + -464px);width:112px;}#rec481668047 .tn-elem[data-elem-id="1660986877929"] .tn-atom{color:#1c1c1c;font-size:19px;font-family:'SFPlus',Arial,sans-serif;line-height:1.55;font-weight:700;background-position:center center;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660986877929"]{top: 868px;left: calc(50% - 97px + 39px);width:194px;}#rec481668047 .tn-elem[data-elem-id="1660986877929"] .tn-atom{font-size:15px;}}#rec481668047 .tn-elem[data-elem-id="1660998577752"]{color:#787878;z-index:78;top: calc(50vh - 275px + 3410px);left: calc(50% - 600px + 30px);width:560px;}#rec481668047 .tn-elem[data-elem-id="1660998577752"] .tn-atom{color:#787878;font-size:20px;font-family:'SFPlus',Arial,sans-serif;line-height:1.55;font-weight:400;background-position:center center;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660998577752"]{top: calc(818px);left: calc(50% - 160px + 102px);width:200px;}#rec481668047 .tn-elem[data-elem-id="1660998577752"]{color:#787878;}#rec481668047 .tn-elem[data-elem-id="1660998577752"] .tn-atom{color:#787878;font-size:13px;}}#rec481668047 .tn-elem[data-elem-id="1660986789142"]{color:#1c1c1c;z-index:77;top: 3374px;left: calc(50% - 56px + -464px);width:112px;}#rec481668047 .tn-elem[data-elem-id="1660986789142"] .tn-atom{color:#1c1c1c;font-size:19px;font-family:'SFPlus',Arial,sans-serif;line-height:1.55;font-weight:700;background-position:center center;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660986789142"]{top: 796px;left: calc(50% - 97px + 39px);width:194px;}#rec481668047 .tn-elem[data-elem-id="1660986789142"] .tn-atom{font-size:15px;}}#rec481668047 .tn-elem[data-elem-id="1660998565202"]{color:#787878;z-index:76;top: calc(50vh - 275px + 3410px);left: calc(50% - 600px + 30px);width:560px;}#rec481668047 .tn-elem[data-elem-id="1660998565202"] .tn-atom{color:#787878;font-size:20px;font-family:'SFPlus',Arial,sans-serif;line-height:1.55;font-weight:400;background-position:center center;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660998565202"]{top: calc(746px);left: calc(50% - 160px + 102px);width:200px;}#rec481668047 .tn-elem[data-elem-id="1660998565202"]{color:#787878;}#rec481668047 .tn-elem[data-elem-id="1660998565202"] .tn-atom{color:#787878;font-size:13px;}}#rec481668047 .tn-elem[data-elem-id="1660986753004"]{color:#1c1c1c;z-index:75;top: 3374px;left: calc(50% - 56px + -464px);width:112px;}#rec481668047 .tn-elem[data-elem-id="1660986753004"] .tn-atom{color:#1c1c1c;font-size:19px;font-family:'SFPlus',Arial,sans-serif;line-height:1.55;font-weight:700;background-position:center center;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660986753004"]{top: 724px;left: calc(50% - 97px + 39px);width:194px;}#rec481668047 .tn-elem[data-elem-id="1660986753004"] .tn-atom{font-size:15px;}}#rec481668047 .tn-elem[data-elem-id="1660998552294"]{color:#787878;z-index:74;top: calc(50vh - 275px + 3410px);left: calc(50% - 600px + 30px);width:560px;}#rec481668047 .tn-elem[data-elem-id="1660998552294"] .tn-atom{color:#787878;font-size:20px;font-family:'SFPlus',Arial,sans-serif;line-height:1.55;font-weight:400;background-position:center center;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660998552294"]{top: calc(674px);left: calc(50% - 160px + 102px);width:200px;}#rec481668047 .tn-elem[data-elem-id="1660998552294"]{color:#787878;}#rec481668047 .tn-elem[data-elem-id="1660998552294"] .tn-atom{color:#787878;font-size:13px;}}#rec481668047 .tn-elem[data-elem-id="1660986552286"]{color:#1c1c1c;z-index:73;top: 3374px;left: calc(50% - 56px + -464px);width:112px;}#rec481668047 .tn-elem[data-elem-id="1660986552286"] .tn-atom{color:#1c1c1c;font-size:19px;font-family:'SFPlus',Arial,sans-serif;line-height:1.55;font-weight:700;background-position:center center;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660986552286"]{top: 652px;left: calc(50% - 97px + 39px);width:194px;}#rec481668047 .tn-elem[data-elem-id="1660986552286"] .tn-atom{font-size:15px;}}#rec481668047 .tn-elem[data-elem-id="1660998535295"]{color:#787878;z-index:72;top: calc(50vh - 275px + 3410px);left: calc(50% - 600px + 30px);width:560px;}#rec481668047 .tn-elem[data-elem-id="1660998535295"] .tn-atom{color:#787878;font-size:20px;font-family:'SFPlus',Arial,sans-serif;line-height:1.55;font-weight:400;background-position:center center;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660998535295"]{top: calc(602px);left: calc(50% - 160px + 102px);width:200px;}#rec481668047 .tn-elem[data-elem-id="1660998535295"]{color:#787878;}#rec481668047 .tn-elem[data-elem-id="1660998535295"] .tn-atom{color:#787878;font-size:13px;}}#rec481668047 .tn-elem[data-elem-id="1660986473260"]{color:#1c1c1c;z-index:71;top: 3374px;left: calc(50% - 56px + -464px);width:112px;}#rec481668047 .tn-elem[data-elem-id="1660986473260"] .tn-atom{color:#1c1c1c;font-size:19px;font-family:'SFPlus',Arial,sans-serif;line-height:1.55;font-weight:700;background-position:center center;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660986473260"]{top: 580px;left: calc(50% - 97px + 39px);width:194px;}#rec481668047 .tn-elem[data-elem-id="1660986473260"] .tn-atom{font-size:15px;}}#rec481668047 .tn-elem[data-elem-id="1660991672864"]{color:#787878;z-index:70;top: calc(50vh - 275px + 3410px);left: calc(50% - 600px + 30px);width:560px;}#rec481668047 .tn-elem[data-elem-id="1660991672864"] .tn-atom{color:#787878;font-size:20px;font-family:'SFPlus',Arial,sans-serif;line-height:1.55;font-weight:400;background-position:center center;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660991672864"]{top: calc(530px);left: calc(50% - 160px + 102px);width:200px;}#rec481668047 .tn-elem[data-elem-id="1660991672864"]{color:#787878;}#rec481668047 .tn-elem[data-elem-id="1660991672864"] .tn-atom{color:#787878;font-size:13px;}}#rec481668047 .tn-elem[data-elem-id="1660986111388"]{color:#1c1c1c;z-index:69;top: 3374px;left: calc(50% - 56px + -464px);width:112px;}#rec481668047 .tn-elem[data-elem-id="1660986111388"] .tn-atom{color:#1c1c1c;font-size:19px;font-family:'SFPlus',Arial,sans-serif;line-height:1.55;font-weight:700;background-position:center center;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660986111388"]{top: 508px;left: calc(50% - 97px + 39px);width:194px;}#rec481668047 .tn-elem[data-elem-id="1660986111388"] .tn-atom{font-size:15px;}}#rec481668047 .tn-elem[data-elem-id="1660991593491"]{color:#787878;z-index:68;top: calc(50vh - 275px + 3410px);left: calc(50% - 600px + 9px);width:560px;}#rec481668047 .tn-elem[data-elem-id="1660991593491"] .tn-atom{color:#787878;font-size:20px;font-family:'SFPlus',Arial,sans-serif;line-height:1.55;font-weight:400;background-position:center center;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660991593491"]{top: calc(458px);left: calc(50% - 160px + 102px);width:200px;}#rec481668047 .tn-elem[data-elem-id="1660991593491"]{color:#787878;}#rec481668047 .tn-elem[data-elem-id="1660991593491"] .tn-atom{color:#787878;font-size:13px;}}#rec481668047 .tn-elem[data-elem-id="1660985076853"]{color:#1c1c1c;z-index:67;top: 3374px;left: calc(50% - 56px + -485px);width:112px;}#rec481668047 .tn-elem[data-elem-id="1660985076853"] .tn-atom{color:#1c1c1c;font-size:19px;font-family:'SFPlus',Arial,sans-serif;line-height:1.55;font-weight:700;background-position:center center;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660985076853"]{top: 436px;left: calc(50% - 97px + 39px);width:194px;}#rec481668047 .tn-elem[data-elem-id="1660985076853"] .tn-atom{font-size:15px;}}#rec481668047 .tn-elem[data-elem-id="1660985208041"]{z-index:66;top: 3342px;left: calc(50% - 59.5px + -562px);width:119px;height:119px;}#rec481668047 .tn-elem[data-elem-id="1660985208041"] .tn-atom{background-position:center center;background-size:cover;background-repeat:no-repeat;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660985208041"]{top: 411px;left: calc(50% - 46px + -97px);width:92px;height:92px;}}#rec481668047 .tn-elem[data-elem-id="1660986789123"]{color:#1c1c1c;z-index:65;top: calc(50vh - 275px + 3336px);left: calc(50% - 600px + -18px);width:1px;}#rec481668047 .tn-elem[data-elem-id="1660986789123"] .tn-atom{color:#1c1c1c;font-size:20px;font-family:'SFPlus',Arial,sans-serif;line-height:1.55;font-weight:600;background-position:center center;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660986789123"]{top: calc(805px);left: calc(50% - 160px + 18px);}#rec481668047 .tn-elem[data-elem-id="1660986789123"] .tn-atom{font-size:16px;}}#rec481668047 .tn-elem[data-elem-id="1660986877905"]{color:#1c1c1c;z-index:64;top: calc(50vh - 275px + 3336px);left: calc(50% - 600px + -18px);width:1px;}#rec481668047 .tn-elem[data-elem-id="1660986877905"] .tn-atom{color:#1c1c1c;font-size:20px;font-family:'SFPlus',Arial,sans-serif;line-height:1.55;font-weight:600;background-position:center center;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660986877905"]{top: calc(877px);left: calc(50% - 160px + 19px);}#rec481668047 .tn-elem[data-elem-id="1660986877905"] .tn-atom{font-size:16px;}}#rec481668047 .tn-elem[data-elem-id="1660986752980"]{color:#1c1c1c;z-index:63;top: calc(50vh - 275px + 3336px);left: calc(50% - 600px + -18px);width:1px;}#rec481668047 .tn-elem[data-elem-id="1660986752980"] .tn-atom{color:#1c1c1c;font-size:20px;font-family:'SFPlus',Arial,sans-serif;line-height:1.55;font-weight:600;background-position:center center;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660986752980"]{top: calc(733px);left: calc(50% - 160px + 18px);}#rec481668047 .tn-elem[data-elem-id="1660986752980"] .tn-atom{font-size:16px;}}#rec481668047 .tn-elem[data-elem-id="1660986552267"]{color:#1c1c1c;z-index:62;top: calc(50vh - 275px + 3336px);left: calc(50% - 600px + -18px);width:1px;}#rec481668047 .tn-elem[data-elem-id="1660986552267"] .tn-atom{color:#1c1c1c;font-size:20px;font-family:'SFPlus',Arial,sans-serif;line-height:1.55;font-weight:600;background-position:center center;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660986552267"]{top: calc(661px);left: calc(50% - 160px + 18px);}#rec481668047 .tn-elem[data-elem-id="1660986552267"] .tn-atom{font-size:16px;}}#rec481668047 .tn-elem[data-elem-id="1660986789129"]{z-index:61;top: 3342px;left: calc(50% - 59.5px + -562px);width:119px;height:119px;}#rec481668047 .tn-elem[data-elem-id="1660986789129"] .tn-atom{background-position:center center;background-size:cover;background-repeat:no-repeat;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660986789129"]{top: 771px;left: calc(50% - 46px + -97px);width:92px;height:92px;}}#rec481668047 .tn-elem[data-elem-id="1660986877912"]{z-index:60;top: 3342px;left: calc(50% - 59.5px + -562px);width:119px;height:119px;}#rec481668047 .tn-elem[data-elem-id="1660986877912"] .tn-atom{background-position:center center;background-size:cover;background-repeat:no-repeat;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660986877912"]{top: 843px;left: calc(50% - 46px + -97px);width:92px;height:92px;}}#rec481668047 .tn-elem[data-elem-id="1660986752987"]{z-index:59;top: 3342px;left: calc(50% - 59.5px + -562px);width:119px;height:119px;}#rec481668047 .tn-elem[data-elem-id="1660986752987"] .tn-atom{background-position:center center;background-size:cover;background-repeat:no-repeat;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660986752987"]{top: 699px;left: calc(50% - 46px + -97px);width:92px;height:92px;}}#rec481668047 .tn-elem[data-elem-id="1660986552273"]{z-index:58;top: 3342px;left: calc(50% - 59.5px + -562px);width:119px;height:119px;}#rec481668047 .tn-elem[data-elem-id="1660986552273"] .tn-atom{background-position:center center;background-size:cover;background-repeat:no-repeat;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660986552273"]{top: 627px;left: calc(50% - 46px + -97px);width:92px;height:92px;}}#rec481668047 .tn-elem[data-elem-id="1660986473235"]{color:#1c1c1c;z-index:57;top: calc(50vh - 275px + 3336px);left: calc(50% - 600px + -18px);width:1px;}#rec481668047 .tn-elem[data-elem-id="1660986473235"] .tn-atom{color:#1c1c1c;font-size:20px;font-family:'SFPlus',Arial,sans-serif;line-height:1.55;font-weight:600;background-position:center center;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660986473235"]{top: calc(589px);left: calc(50% - 160px + 18px);}#rec481668047 .tn-elem[data-elem-id="1660986473235"] .tn-atom{font-size:16px;}}#rec481668047 .tn-elem[data-elem-id="1660986473243"]{z-index:56;top: 3342px;left: calc(50% - 59.5px + -562px);width:119px;height:119px;}#rec481668047 .tn-elem[data-elem-id="1660986473243"] .tn-atom{background-position:center center;background-size:cover;background-repeat:no-repeat;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660986473243"]{top: 555px;left: calc(50% - 46px + -97px);width:92px;height:92px;}}#rec481668047 .tn-elem[data-elem-id="1660986111372"]{color:#1c1c1c;z-index:55;top: calc(50vh - 275px + 3336px);left: calc(50% - 600px + -18px);width:1px;}#rec481668047 .tn-elem[data-elem-id="1660986111372"] .tn-atom{color:#1c1c1c;font-size:20px;font-family:'SFPlus',Arial,sans-serif;line-height:1.55;font-weight:600;background-position:center center;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660986111372"]{top: calc(517px);left: calc(50% - 160px + 18px);}#rec481668047 .tn-elem[data-elem-id="1660986111372"] .tn-atom{font-size:16px;}}#rec481668047 .tn-elem[data-elem-id="1660986111377"]{z-index:54;top: 3342px;left: calc(50% - 59.5px + -562px);width:119px;height:119px;}#rec481668047 .tn-elem[data-elem-id="1660986111377"] .tn-atom{background-position:center center;background-size:cover;background-repeat:no-repeat;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660986111377"]{top: 483px;left: calc(50% - 46px + -97px);width:92px;height:92px;}}#rec481668047 .tn-elem[data-elem-id="1660985990660"]{color:#1c1c1c;z-index:53;top: calc(50vh - 275px + 3336px);left: calc(50% - 600px + -18px);width:1px;}#rec481668047 .tn-elem[data-elem-id="1660985990660"] .tn-atom{color:#1c1c1c;font-size:20px;font-family:'SFPlus',Arial,sans-serif;line-height:1.55;font-weight:600;background-position:center center;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1660985990660"]{top: calc(445px);left: calc(50% - 160px + 19px);}#rec481668047 .tn-elem[data-elem-id="1660985990660"] .tn-atom{font-size:16px;}}#rec481668047 .tn-elem[data-elem-id="1662199815268"]{z-index:1;top: calc(50vh - 275px + 3198px);left: calc(50% - 600px + -194px);width:100px;height:100px;}#rec481668047 .tn-elem[data-elem-id="1662199815268"] .tn-atom{background-position:center center;background-size:cover;background-repeat:no-repeat;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1662199815268"]{top: -178px;left: calc(50% - 399.5px + -20px);width:799px;height:799px;}}#rec481668047 .tn-elem[data-elem-id="1662843635422"]{color:#1c1c1c;text-align:center;z-index:95;top: 3460px;left: calc(50% - 182px + -409px);width:364px;}#rec481668047 .tn-elem[data-elem-id="1662843635422"] .tn-atom{color:#1c1c1c;font-size:20px;font-family:'SFPlus',Arial,sans-serif;line-height:1.55;font-weight:400;background-position:center center;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1662843635422"]{top: 643px;left: calc(50% - 115px + 0px);width:230px;}#rec481668047 .tn-elem[data-elem-id="1662843635422"] .tn-atom{font-size:16px;}}#rec481668047 .tn-elem[data-elem-id="1662843584783"]{z-index:94;top: 3542px;left: calc(50% - 50px + -412px);width:100px;height:100px;}#rec481668047 .tn-elem[data-elem-id="1662843584783"] .tn-atom{background-position:center center;background-size:cover;background-repeat:no-repeat;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec481668047 .tn-elem[data-elem-id="1662843584783"]{top: 368px;left: calc(50% - 130px + 0px);width:260px;height:260px;}}</style><div class='t396'><div class="t396__artboard" data-artboard-recid="481668047" data-artboard-height="550" data-artboard-height-res-640="550" data-artboard-height-res-320="950" data-artboard-height_vh="100" data-artboard-valign="center" data-artboard-ovrflw=""> <div class="t396__carrier" data-artboard-recid="481668047"></div> 
+<div class="t396__filter" data-artboard-recid="481668047"></div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660967273501' data-elem-id='1660967273501' data-elem-type='shape' data-field-top-value="3152" data-field-top-res-320-value="32" data-field-left-value="-1204" data-field-left-res-320-value="133" data-field-height-value="40" data-field-height-res-320-value="30" data-field-width-value="40" data-field-width-res-320-value="30" data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px"><div class='tn-atom t-bgimg' data-original="https://static.tildacdn.info/tild3034-3433-4661-b732-336439353535/Group_37398.svg" style="background-image:url('tild3034-3433-4661-b732-336439353535/Group_37398.svg');"> </div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660967385484' data-elem-id='1660967385484' data-elem-type='text' data-field-top-value="3180" data-field-top-res-320-value="135" data-field-left-value="-1094" data-field-left-res-320-value="-97" data-field-width-value="36" data-field-width-res-320-value="67" data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px"><div class='tn-atom' field='tn_text_1660967385484'>
+
+    <p id="clock"></p>
+    
+</div> </div> 
+
+<script>
+    function clock(){
+  let date = new Date(),
+         hours = (date.getHours() < 10) ? '0' + date.getHours() : date.getHours(),
+         minutes = (date.getMinutes() < 10) ? '0' + date.getMinutes() : date.getMinutes(),
+         seconds = (date.getSeconds() < 10) ? '0' + date.getSeconds() : date.getSeconds();
+  document.getElementById('clock').innerHTML = hours + ':' + minutes;
+}
+setInterval(clock, 1000);
+clock();    
+</script>
+
+<div class='t396__elem tn-elem tn-elem__4816680471660967338116' data-elem-id='1660967338116' data-elem-type='shape' data-field-top-value="3142" data-field-top-res-320-value="104" data-field-left-value="-1094" data-field-left-res-320-value="-98" data-field-height-value="100" data-field-height-res-320-value="86" data-field-width-value="100" data-field-width-res-320-value="86" data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px"><div class='tn-atom t-bgimg' data-original="https://static.tildacdn.info/tild6133-3636-4533-b562-376364376330/Group_37313.svg" style="background-image:url('tild6133-3636-4533-b562-376364376330/Group_37313.svg');"> </div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660968079090' data-elem-id='1660968079090' data-elem-type='shape' data-field-top-value="3156" data-field-top-res-320-value="338" data-field-left-value="-408" data-field-left-res-320-value="0" data-field-height-value="519" data-field-height-res-320-value="671" data-field-width-value="428" data-field-width-res-320-value="100" data-field-axisy-value="top" data-field-axisx-value="center" data-field-axisx-res-320-value="center" data-field-container-value="window" data-field-container-res-320-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px" data-field-widthunits-res-320-value="%"><div class='tn-atom'> </div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471662199227879' data-elem-id='1662199227879' data-elem-type='shape' data-field-top-value="3142" data-field-top-res-320-value="-72" data-field-left-value="34" data-field-left-res-320-value="-2" data-field-height-value="100" data-field-height-res-320-value="153" data-field-width-value="100" data-field-width-res-320-value="118" data-field-axisy-value="top" data-field-axisx-value="left" data-field-axisx-res-320-value="center" data-field-container-value="grid" data-field-container-res-320-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px" data-field-widthunits-res-320-value="%"><div class='tn-atom t-bgimg' data-original="https://static.tildacdn.info/tild6234-3564-4563-b935-356162373264/Group_37412.svg" style="background-image:url('tild6234-3564-4563-b935-356162373264/Group_37412.svg');"> </div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660968835853' data-elem-id='1660968835853' data-elem-type='shape' data-field-top-value="3155" data-field-top-res-320-value="35" data-field-left-value="-1338" data-field-left-res-320-value="-61" data-field-height-value="36" data-field-height-res-320-value="24" data-field-width-value="78" data-field-width-res-320-value="52" data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px"><div class='tn-atom t-bgimg' data-original="https://static.tildacdn.info/tild3939-6266-4232-b533-613363323664/Lesson_Schedule.svg" style="background-image:url('tild3939-6266-4232-b533-613363323664/Lesson_Schedule.svg');"> </div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471661511431833' data-elem-id='1661511431833' data-elem-type='shape' data-field-top-value="95" data-field-top-res-960-value="95" data-field-top-res-640-value="101" data-field-top-res-480-value="132" data-field-top-res-320-value="3328" data-field-left-value="-9" data-field-left-res-960-value="0" data-field-left-res-640-value="1" data-field-left-res-480-value="1" data-field-left-res-320-value="-975" data-field-height-value="460" data-field-height-res-640-value="349" data-field-height-res-480-value="287" data-field-width-value="460" data-field-width-res-640-value="349" data-field-width-res-480-value="287" data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px" data-animate-mobile="y" data-animate-sbs-event="intoview" data-animate-sbs-trg="0.5" data-animate-sbs-trgofst="0" data-animate-sbs-loop="loop" data-animate-sbs-opts="[{'ti':'0','mx':'0','my':'0','sx':'1','sy':'1','op':'1','ro':'0','bl':'0','ea':'','dt':'0'},{'ti':'1000','mx':'0','my':'0','sx':'1','sy':'1','op':0.75,'ro':'0','bl':'0','ea':'','dt':'0'},{'ti':2500,'mx':'0','my':'0','sx':'1','sy':'1','op':1,'ro':'0','bl':'0','ea':'easeIn','dt':'0'}]"><div class='tn-atom t-bgimg' data-original="https://static.tildacdn.info/tild3136-3632-4134-a335-303831363635/1_Glow__Blurry_Text_.png" style="background-image:url('tild3136-3632-4134-a335-303831363635/-/resize/20x/1_Glow__Blurry_Text_.png');"> </div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660968725394' data-elem-id='1660968725394' data-elem-type='shape' data-field-top-value="3129" data-field-top-res-320-value="23" data-field-left-value="-1384" data-field-left-res-320-value="-115" data-field-height-value="89" data-field-height-res-320-value="49" data-field-width-value="89" data-field-width-res-320-value="51" data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px"><div class='tn-atom t-bgimg' data-original="https://static.tildacdn.info/tild6331-3066-4936-b135-653365623535/3_Grad_Hat.png" style="background-image:url('tild6331-3066-4936-b135-653365623535/-/resize/20x/3_Grad_Hat.png');"> </div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660970384171' data-elem-id='1660970384171' data-elem-type='text' data-field-top-value="3236" data-field-top-res-320-value="388" data-field-left-value="-549" data-field-left-res-320-value="-55" data-field-width-value="122" data-field-width-res-320-value="172" data-field-axisy-value="top" data-field-axisx-value="center" data-field-axisx-res-320-value="center" data-field-container-value="window" data-field-container-res-320-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px"><div class='tn-atom' field='tn_text_1660970384171'>
+    
+    <p class="today"></p>
+    
+    </div> </div> 
+
+ 
+    <p class="text" style="display: none;"></p>
+
+<div class='t396__elem tn-elem tn-elem__4816680471660970303001' data-elem-id='1660970303001' data-elem-type='text' data-field-top-value="3192" data-field-top-res-320-value="359" data-field-left-value="-496" data-field-left-res-320-value="-54" data-field-width-value="227" data-field-width-res-320-value="174" data-field-axisy-value="top" data-field-axisx-value="center" data-field-axisx-res-320-value="center" data-field-container-value="window" data-field-container-res-320-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px"><div class='tn-atom' field='tn_text_1660970303001'>Live Schedule</div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660984287973' data-elem-id='1660984287973' data-elem-type='text' data-field-top-value="3167" data-field-top-res-320-value="368" data-field-left-value="306" data-field-left-res-320-value="246" data-field-width-value="72" data-field-width-res-320-value="58" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px"><div class='tn-atom' field='tn_text_1660984287973'>
+    <p id="data"></p>
+</div> </div> 
+
+<script>
+    function month(){ 
+    var data = new Date().toLocaleDateString('en-us', { month: 'short'})
+    var name = new Date().toLocaleDateString('en-us', { day: 'numeric' })
+    var dataText = document.querySelector('#data');
+    dataText.innerHTML = data + '. ' + name;   
+}
+setInterval(month, 1000);
+month(); 
+</script>
+<div class='t396__elem tn-elem tn-elem__4816680471660984214912' data-elem-id='1660984214912' data-elem-type='shape' data-field-top-value="3219" data-field-top-res-320-value="370" data-field-left-value="-311" data-field-left-res-320-value="71" data-field-height-value="18" data-field-height-res-320-value="16" data-field-width-value="18" data-field-width-res-320-value="16" data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px"><div class='tn-atom t-bgimg' data-original="https://static.tildacdn.info/tild6562-6262-4362-a632-343264623632/menu-board.svg" style="background-image:url('tild6562-6262-4362-a632-343264623632/menu-board.svg');"> </div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660984152288' data-elem-id='1660984152288' data-elem-type='shape' data-field-top-value="3209" data-field-top-res-320-value="359" data-field-left-value="-282" data-field-left-res-320-value="99" data-field-height-value="42" data-field-height-res-320-value="38" data-field-width-value="104" data-field-width-res-320-value="98" data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px"><div class='tn-atom'> </div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660967515003' data-elem-id='1660967515003' data-elem-type='text' data-field-top-value="3206" data-field-top-res-320-value="155" data-field-left-value="-944" data-field-left-res-320-value="47" data-field-width-value="172" data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px"><div class='tn-atom' field='tn_text_1660967515003'>
+
+    <p class="number"></p>
+    
+</div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660967441016' data-elem-id='1660967441016' data-elem-type='text' data-field-top-value="3154" data-field-top-res-320-value="117" data-field-left-value="-962" data-field-left-res-320-value="24" data-field-width-value="135" data-field-width-res-320-value="125" data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px"><div class='tn-atom' field='tn_text_1660967441016'>This is a live school schedule</div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471662839733869' data-elem-id='1662839733869' data-elem-type='shape' data-field-top-value="3236" data-field-top-res-320-value="206" data-field-left-value="216" data-field-left-res-320-value="28" data-field-height-value="102" data-field-height-res-320-value="100" data-field-width-value="70" data-field-width-res-320-value="72" data-field-axisy-value="top" data-field-axisx-value="left" data-field-axisx-res-320-value="center" data-field-container-value="grid" data-field-container-res-320-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px"><div onclick="thursday()" id="thursday" class='tn-atom t-bgimg' style="background-image:url('ChooseWeek/Frame\ 27.png');"> </div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471662839732354' data-elem-id='1662839732354' data-elem-type='shape' data-field-top-value="3236" data-field-top-res-320-value="206" data-field-left-value="216" data-field-left-res-320-value="142" data-field-height-value="102" data-field-height-res-320-value="100" data-field-width-value="70" data-field-width-res-320-value="72" data-field-axisy-value="top" data-field-axisx-value="left" data-field-axisx-res-320-value="center" data-field-container-value="grid" data-field-container-res-320-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px"><div onclick="saturday()" id="saturday" class='tn-atom t-bgimg' style="background-image:url('ChooseWeek/Frame\ 29.png');"> </div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471662839770139' data-elem-id='1662839770139' data-elem-type='shape' data-field-top-value="3236" data-field-top-res-320-value="206" data-field-left-value="216" data-field-left-res-320-value="85" data-field-height-value="102" data-field-height-res-320-value="100" data-field-width-value="70" data-field-width-res-320-value="72" data-field-axisy-value="top" data-field-axisx-value="left" data-field-axisx-res-320-value="center" data-field-container-value="grid" data-field-container-res-320-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px"><div onclick="friday()" id="friday" class='tn-atom t-bgimg' style="background-image:url('ChooseWeek/Frame\ 28.png');"> </div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471662839730770' data-elem-id='1662839730770' data-elem-type='shape' data-field-top-value="3236" data-field-top-res-320-value="206" data-field-left-value="216" data-field-left-res-320-value="-29" data-field-height-value="102" data-field-height-res-320-value="100" data-field-width-value="70" data-field-width-res-320-value="72" data-field-axisy-value="top" data-field-axisx-value="left" data-field-axisx-res-320-value="center" data-field-container-value="grid" data-field-container-res-320-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px"><div onclick="wednesday()" id="wednesday" class='tn-atom t-bgimg' style="background-image:url('ChooseWeek/Frame\ 26.png');"> </div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471662839728009' data-elem-id='1662839728009' data-elem-type='shape' data-field-top-value="3236" data-field-top-res-320-value="206" data-field-left-value="216" data-field-left-res-320-value="-143" data-field-height-value="102" data-field-height-res-320-value="100" data-field-width-value="70" data-field-width-res-320-value="72" data-field-axisy-value="top" data-field-axisx-value="left" data-field-axisx-res-320-value="center" data-field-container-value="grid" data-field-container-res-320-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px"><div onclick="monday()" id="monday" class='tn-atom t-bgimg' style="background-image:url('ChooseWeek/Frame\ 24.png');"> </div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471662839619643' data-elem-id='1662839619643' data-elem-type='shape' data-field-top-value="3268" data-field-top-res-320-value="206" data-field-left-value="74" data-field-left-res-320-value="-86" data-field-height-value="102" data-field-height-res-320-value="100" data-field-width-value="70" data-field-width-res-320-value="72" data-field-axisy-value="top" data-field-axisx-value="left" data-field-axisx-res-320-value="center" data-field-container-value="grid" data-field-container-res-320-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px"><div onclick="tuesday()" id="tuesday" class='tn-atom t-bgimg' style="background-image:url('ChooseWeek/Frame\ 25.png');"> </div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471662318769455' data-elem-id='1662318769455' data-elem-type='shape' data-field-top-value="3279" data-field-top-res-320-value="884" data-field-left-value="-408" data-field-left-res-320-value="141" data-field-height-value="10" data-field-width-value="15" data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px"><a id="arrowSeven" class='tn-atom t-bgimg'  style="background-image:url('arrow.svg');"> </a> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471662318769446' data-elem-id='1662318769446' data-elem-type='shape' data-field-top-value="3269" data-field-top-res-320-value="812" data-field-left-value="-418" data-field-left-res-320-value="141" data-field-height-value="10" data-field-width-value="15" data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px"><a id="arrowSix" class='tn-atom t-bgimg'  style="background-image:url('arrow.svg');"> </a> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471662318769436' data-elem-id='1662318769436' data-elem-type='shape' data-field-top-value="3269" data-field-top-res-320-value="740" data-field-left-value="-418" data-field-left-res-320-value="141" data-field-height-value="10" data-field-width-value="15" data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px"><a id="arrowFive" class='tn-atom t-bgimg'  style="background-image:url('arrow.svg');"> </a> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471662318733901' data-elem-id='1662318733901' data-elem-type='shape' data-field-top-value="3269" data-field-top-res-320-value="668" data-field-left-value="-418" data-field-left-res-320-value="141" data-field-height-value="10" data-field-width-value="15" data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px"><a id="arrowFour" class='tn-atom t-bgimg'  style="background-image:url('arrow.svg');"> </a> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471662318733890' data-elem-id='1662318733890' data-elem-type='shape' data-field-top-value="3259" data-field-top-res-320-value="596" data-field-left-value="-428" data-field-left-res-320-value="141" data-field-height-value="10" data-field-width-value="15" data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px"><a id="arrowThree" class='tn-atom t-bgimg'  style="background-image:url('arrow.svg');"> </a> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471662318674333' data-elem-id='1662318674333' data-elem-type='shape' data-field-top-value="3259" data-field-top-res-320-value="524" data-field-left-value="-428" data-field-left-res-320-value="141" data-field-height-value="10" data-field-width-value="15" data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px"><a id="arrowTwo" class='tn-atom t-bgimg'  style="background-image:url('arrow.svg');"> </a> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471662318581795' data-elem-id='1662318581795' data-elem-type='shape' data-field-top-value="3249" data-field-top-res-320-value="453" data-field-left-value="-438" data-field-left-res-320-value="141" data-field-height-value="10" data-field-width-value="15" data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px"><a id="arrowOne" class='tn-atom t-bgimg'  style="background-image:url('arrow.svg');"> </a> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660998589783' data-elem-id='1660998589783' data-elem-type='text' data-field-top-value="3410" data-field-top-res-320-value="890" data-field-left-value="30" data-field-left-res-320-value="102" data-field-width-value="560" data-field-width-res-320-value="200" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px"><div class='tn-atom' field='tn_text_1660998589783'>
+
+  <style>
+
+.lessons-schedule__item {
+--status-color: inherit;
+--status-indicator-color: var(--status-color);
+--status-indicator-size: 7px;
+display: flex;
+margin-bottom: 15px;
+align-items: center;
+}
+.lessons-schedule__item--upcoming {
+--status-color: #FF6B6B;
+}
+.lessons-schedule__item--completed {
+--status-color: #76EF83;
+}
+.lessons-schedule__item--going {
+--status-color: #FFC83F;
+}
+.lessons-schedule__item__second-line {
+display: flex;
+}
+.lessons-schedule__item__title {
+font-weight: bold;
+}
+.lessons-schedule__item__status {
+display: flex;
+align-items: center;
+color: var(--status-color);
+}
+.lessons-schedule__item__status:before {
+content: "";
+display: block;
+width: var(--status-indicator-size);
+height: var(--status-indicator-size);
+background-color: var(--status-indicator-color);
+margin-right: 5px;
+border-radius: 50%;
+}
+.lessons-schedule__item__time:before {
+content: ", ";
+}
+
+</style>
+
+  <div id="sevenTime" class="lessons-schedule" style="max-width: 300px;">
+  <div class="lessons-schedule__item" data-start="13:20" data-finish="14:00">
+    <div class="lessons-schedule__item__details">
+      <div class="lessons-schedule__item__second-line">
+        <div class="lessons-schedule__item__status">Loading...</div>
+        <div class="lessons-schedule__item__time">13:20 - 14:00</div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+</div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660986877929' data-elem-id='1660986877929' data-elem-type='text' data-field-top-value="3374" data-field-top-res-320-value="868" data-field-left-value="-464" data-field-left-res-320-value="39" data-field-width-value="112" data-field-width-res-320-value="194" data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px"><div id="sevenLessonText" class='tn-atom' field='tn_text_1660986877929'>Physical Education</div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660998577752' data-elem-id='1660998577752' data-elem-type='text' data-field-top-value="3410" data-field-top-res-320-value="818" data-field-left-value="30" data-field-left-res-320-value="102" data-field-width-value="560" data-field-width-res-320-value="200" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px"><div class='tn-atom' field='tn_text_1660998577752'>
+  
+
+  <div id="sixTime" class="lessons-schedule" style="max-width: 300px;">
+  <div class="lessons-schedule__item" data-start="12:30" data-finish="13:10">
+    <div class="lessons-schedule__item__details">
+      <div class="lessons-schedule__item__second-line">
+        <div class="lessons-schedule__item__status">Loading...</div>
+        <div class="lessons-schedule__item__time">12:30 - 13:10</div>
+      </div>
+    </div>
+  </div>
+</div>
+  
+  
+</div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660986789142' data-elem-id='1660986789142' data-elem-type='text' data-field-top-value="3374" data-field-top-res-320-value="796" data-field-left-value="-464" data-field-left-res-320-value="39" data-field-width-value="112" data-field-width-res-320-value="194" data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px"><div id="sixLessonText" class='tn-atom' field='tn_text_1660986789142'>Algebra</div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660998565202' data-elem-id='1660998565202' data-elem-type='text' data-field-top-value="3410" data-field-top-res-320-value="746" data-field-left-value="30" data-field-left-res-320-value="102" data-field-width-value="560" data-field-width-res-320-value="200" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px"><div class='tn-atom' field='tn_text_1660998565202'>
+  
+  <div id="fiveTime" class="lessons-schedule" style="max-width: 300px;">
+  <div class="lessons-schedule__item" data-start="11:40" data-finish="12:20">
+    <div class="lessons-schedule__item__details">
+      <div class="lessons-schedule__item__second-line">
+        <div class="lessons-schedule__item__status">Loading...</div>
+        <div class="lessons-schedule__item__time">11:40 - 12:20</div>
+      </div>
+    </div>
+  </div>
+</div>  
+  
+</div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660986753004' data-elem-id='1660986753004' data-elem-type='text' data-field-top-value="3374" data-field-top-res-320-value="724" data-field-left-value="-464" data-field-left-res-320-value="39" data-field-width-value="112" data-field-width-res-320-value="194" data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px"><div id="fiveLessonText" class='tn-atom' field='tn_text_1660986753004'>Physics</div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660998552294' data-elem-id='1660998552294' data-elem-type='text' data-field-top-value="3410" data-field-top-res-320-value="674" data-field-left-value="30" data-field-left-res-320-value="102" data-field-width-value="560" data-field-width-res-320-value="200" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px"><div class='tn-atom' field='tn_text_1660998552294'>
+  
+  <div id="fourTime" class="lessons-schedule" style="max-width: 300px;">
+  <div class="lessons-schedule__item" data-start="10:40" data-finish="11:20">
+    <div class="lessons-schedule__item__details">
+      <div class="lessons-schedule__item__second-line">
+        <div class="lessons-schedule__item__status">Loading...</div>
+        <div class="lessons-schedule__item__time">10:40 - 11:20</div>
+      </div>
+    </div>
+  </div>
+</div>  
+
+  </div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660986552286' data-elem-id='1660986552286' data-elem-type='text' data-field-top-value="3374" data-field-top-res-320-value="652" data-field-left-value="-464" data-field-left-res-320-value="39" data-field-width-value="112" data-field-width-res-320-value="194" data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px"><div id="fourLessonText" class='tn-atom' field='tn_text_1660986552286'>Literature</div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660998535295' data-elem-id='1660998535295' data-elem-type='text' data-field-top-value="3410" data-field-top-res-320-value="602" data-field-left-value="30" data-field-left-res-320-value="102" data-field-width-value="560" data-field-width-res-320-value="200" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px"><div class='tn-atom' field='tn_text_1660998535295'>
+  
+  <div id="threeTime" class="lessons-schedule" style="max-width: 300px;">
+  <div class="lessons-schedule__item" data-start="9:40" data-finish="10:20">
+    <div class="lessons-schedule__item__details">
+      <div class="lessons-schedule__item__second-line">
+        <div class="lessons-schedule__item__status">Loading...</div>
+        <div class="lessons-schedule__item__time">9:40 - 10:20</div>
+      </div>
+    </div>
+  </div>
+</div>  
+  
+</div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660986473260' data-elem-id='1660986473260' data-elem-type='text' data-field-top-value="3374" data-field-top-res-320-value="580" data-field-left-value="-464" data-field-left-res-320-value="39" data-field-width-value="112" data-field-width-res-320-value="194" data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px"><div id="threeLessonText" class='tn-atom' field='tn_text_1660986473260'>Russian Language</div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660991672864' data-elem-id='1660991672864' data-elem-type='text' data-field-top-value="3410" data-field-top-res-320-value="530" data-field-left-value="30" data-field-left-res-320-value="102" data-field-width-value="560" data-field-width-res-320-value="200" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px"><div class='tn-atom' field='tn_text_1660991672864'>
+  
+  <div id="twoTime" class="lessons-schedule" style="max-width: 300px;">
+  <div class="lessons-schedule__item" data-start="8:50" data-finish="9:30">
+    <div class="lessons-schedule__item__details">
+      <div class="lessons-schedule__item__second-line">
+        <div class="lessons-schedule__item__status">Loading...</div>
+        <div class="lessons-schedule__item__time">8:50 - 9:30</div>
+      </div>
+    </div>
+  </div>
+</div>  
+  
+</div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660986111388' data-elem-id='1660986111388' data-elem-type='text' data-field-top-value="3374" data-field-top-res-320-value="508" data-field-left-value="-464" data-field-left-res-320-value="39" data-field-width-value="112" data-field-width-res-320-value="194" data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px"><div id="twoLessonText" class='tn-atom' field='tn_text_1660986111388'>Chemistry</div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660991593491' data-elem-id='1660991593491' data-elem-type='text' data-field-top-value="3410" data-field-top-res-320-value="458" data-field-left-value="9" data-field-left-res-320-value="102" data-field-width-value="560" data-field-width-res-320-value="200" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px"><div class='tn-atom' field='tn_text_1660991593491'>
+  
+  <div id="oneTime" class="lessons-schedule" style="max-width: 300px;">
+  <div class="lessons-schedule__item" data-start="8:00" data-finish="8:40">
+    <div class="lessons-schedule__item__details">
+      <div class="lessons-schedule__item__second-line">
+        <div class="lessons-schedule__item__status">Loading...</div>
+        <div class="lessons-schedule__item__time">8:00 - 8:40</div>
+      </div>
+    </div>
+  </div>
+</div>  
+  
+</div> </div> 
+
+<script>
+   function test() { document.addEventListener("DOMContentLoaded", () => {
+    const STATUSES = {
+      upcoming: {
+        className: "lessons-schedule__item--upcoming",
+        label: "Upcoming",
+        match: (now, range) => now < range[0],
+        getNextUpdateDelay: (now, range) => range[0] - now
+      },
+  
+      going: {
+        className: "lessons-schedule__item--going",
+        label: "Going",
+        match: (now, range) => now >= range[0] && now <= range[1],
+        getNextUpdateDelay: (now, range) => range[1] - now
+      },
+  
+      completed: {
+        className: "lessons-schedule__item--completed",
+        label: "Completed",
+        match: (now, range) => now > range[1],
+        getNextUpdateDelay: null
+      }
+    };
+  
+    document.querySelectorAll(".lessons-schedule").forEach((container) => {
+      const getTimeRange = (item) => {
+        const timeRange = ["start", "finish"]
+          .map((fieldName) => {
+            const range = String(item.dataset[fieldName]).split(":");
+            if (range.length < 2) {
+              return null;
+            }
+  
+            const dateInstance = new Date();
+            dateInstance.setHours(+range[0]);
+            dateInstance.setMinutes(+range[1]);
+  
+            return +dateInstance;
+          })
+          .filter(Boolean)
+          .sort((a, b) => {
+            return a - b;
+          });
+  
+        return timeRange.length === 2 ? timeRange : null;
+      };
+  
+      container
+        .querySelectorAll(".lessons-schedule__item")
+        .forEach(function updateItem(item) {
+          const range = getTimeRange(item);
+          if (!range) {
+            return;
+          }
+  
+          const now = Date.now();
+          const statusContainer = item.querySelector(
+            ".lessons-schedule__item__status"
+          );
+          let activeStatus = null;
+  
+          for (const statusDefinition of Object.values(STATUSES)) {
+            const isActive = statusDefinition.match(now, range);
+            item.classList.toggle(statusDefinition.className, isActive);
+            if (!isActive) {
+              continue;
+            }
+  
+            statusContainer.textContent = statusDefinition.label;
+            activeStatus = statusDefinition;
+          }
+  
+          if (!activeStatus?.getNextUpdateDelay) {
+            return;
+          }
+  
+          setTimeout(
+            () => updateItem(item),
+            activeStatus?.getNextUpdateDelay(now, range)
+          );
+        });
+    });
+  });
+  
+  if (document.readyState === "complete") {
+    document.dispatchEvent(new Event("DOMContentLoaded"));
+  }
+
+}
+
+setInterval(test, 1000);
+test();
+  
+  </script>
+
+
+<div class='t396__elem tn-elem tn-elem__4816680471660985076853' data-elem-id='1660985076853' data-elem-type='text' data-field-top-value="3374" data-field-top-res-320-value="436" data-field-left-value="-485" data-field-left-res-320-value="39" data-field-width-value="112" data-field-width-res-320-value="194" data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px"><div id="oneLessonText" class='tn-atom' field='tn_text_1660985076853'>Geography</div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660985208041' data-elem-id='1660985208041' data-elem-type='shape' data-field-top-value="3342" data-field-top-res-320-value="411" data-field-left-value="-562" data-field-left-res-320-value="-97" data-field-height-value="119" data-field-height-res-320-value="92" data-field-width-value="119" data-field-width-res-320-value="92" data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px"><div id="LessonOneImg" class='tn-atom t-bgimg' style="background-image:url('');"> </div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660986789123' data-elem-id='1660986789123' data-elem-type='text' data-field-top-value="3336" data-field-top-res-320-value="805" data-field-left-value="-18" data-field-left-res-320-value="18" data-field-width-value="1" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px"><div id="numberSixLesson" class='tn-atom' field='tn_text_1660986789123'>6</div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660986877905' data-elem-id='1660986877905' data-elem-type='text' data-field-top-value="3336" data-field-top-res-320-value="877" data-field-left-value="-18" data-field-left-res-320-value="19" data-field-width-value="1" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px"><div id="numberSevenLesson" class='tn-atom' field='tn_text_1660986877905'>7</div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660986752980' data-elem-id='1660986752980' data-elem-type='text' data-field-top-value="3336" data-field-top-res-320-value="733" data-field-left-value="-18" data-field-left-res-320-value="18" data-field-width-value="1" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px"><div id="numberFiveLesson" class='tn-atom' field='tn_text_1660986752980'>5</div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660986552267' data-elem-id='1660986552267' data-elem-type='text' data-field-top-value="3336" data-field-top-res-320-value="661" data-field-left-value="-18" data-field-left-res-320-value="18" data-field-width-value="1" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px"><div id="numberFourLesson" class='tn-atom' field='tn_text_1660986552267'>4</div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660986789129' data-elem-id='1660986789129' data-elem-type='shape' data-field-top-value="3342" data-field-top-res-320-value="771" data-field-left-value="-562" data-field-left-res-320-value="-97" data-field-height-value="119" data-field-height-res-320-value="92" data-field-width-value="119" data-field-width-res-320-value="92" data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px"><div id="LessonSixImg" class='tn-atom t-bgimg' style="background-image:url('');"> </div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660986877912' data-elem-id='1660986877912' data-elem-type='shape' data-field-top-value="3342" data-field-top-res-320-value="843" data-field-left-value="-562" data-field-left-res-320-value="-97" data-field-height-value="119" data-field-height-res-320-value="92" data-field-width-value="119" data-field-width-res-320-value="92" data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px"><div id="LessonSevenImg" class='tn-atom t-bgimg' style="background-image:url('');"> </div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660986752987' data-elem-id='1660986752987' data-elem-type='shape' data-field-top-value="3342" data-field-top-res-320-value="699" data-field-left-value="-562" data-field-left-res-320-value="-97" data-field-height-value="119" data-field-height-res-320-value="92" data-field-width-value="119" data-field-width-res-320-value="92" data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px"><div id="LessonFiveImg" class='tn-atom t-bgimg' style="background-image:url('');"> </div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660986552273' data-elem-id='1660986552273' data-elem-type='shape' data-field-top-value="3342" data-field-top-res-320-value="627" data-field-left-value="-562" data-field-left-res-320-value="-97" data-field-height-value="119" data-field-height-res-320-value="92" data-field-width-value="119" data-field-width-res-320-value="92" data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px"><div id="LessonFourImg" class='tn-atom t-bgimg' style="background-image:url('');"> </div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660986473235' data-elem-id='1660986473235' data-elem-type='text' data-field-top-value="3336" data-field-top-res-320-value="589" data-field-left-value="-18" data-field-left-res-320-value="18" data-field-width-value="1" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px"><div id="numberThreeLesson" class='tn-atom' field='tn_text_1660986473235'>3</div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660986473243' data-elem-id='1660986473243' data-elem-type='shape' data-field-top-value="3342" data-field-top-res-320-value="555" data-field-left-value="-562" data-field-left-res-320-value="-97" data-field-height-value="119" data-field-height-res-320-value="92" data-field-width-value="119" data-field-width-res-320-value="92" data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px"><div id="LessonThreeImg" class='tn-atom t-bgimg' style="background-image:url('');"> </div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660986111372' data-elem-id='1660986111372' data-elem-type='text' data-field-top-value="3336" data-field-top-res-320-value="517" data-field-left-value="-18" data-field-left-res-320-value="18" data-field-width-value="1" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px"><div id="numberTwoLesson" class='tn-atom' field='tn_text_1660986111372'>2</div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660986111377' data-elem-id='1660986111377' data-elem-type='shape' data-field-top-value="3342" data-field-top-res-320-value="483" data-field-left-value="-562" data-field-left-res-320-value="-97" data-field-height-value="119" data-field-height-res-320-value="92" data-field-width-value="119" data-field-width-res-320-value="92" data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px"><div id="LessonTwoImg" class='tn-atom t-bgimg' style="background-image:url('');"> </div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471660985990660' data-elem-id='1660985990660' data-elem-type='text' data-field-top-value="3336" data-field-top-res-320-value="445" data-field-left-value="-18" data-field-left-res-320-value="19" data-field-width-value="1" data-field-axisy-value="top" data-field-axisx-value="left" data-field-container-value="grid" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px"><div id="numberOneLesson" class='tn-atom' field='tn_text_1660985990660'>1</div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471662199815268' data-elem-id='1662199815268' data-elem-type='shape' data-field-top-value="3198" data-field-top-res-320-value="-178" data-field-left-value="-194" data-field-left-res-320-value="-20" data-field-height-value="100" data-field-height-res-320-value="799" data-field-width-value="100" data-field-width-res-320-value="799" data-field-axisy-value="top" data-field-axisx-value="left" data-field-axisx-res-320-value="center" data-field-container-value="grid" data-field-container-res-320-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px"><div class='tn-atom t-bgimg' data-original="https://static.tildacdn.info/tild3632-6466-4335-b032-633063623334/Group_37469.svg" style="background-image:url('tild3632-6466-4335-b032-633063623334/Group_37469.svg');"> </div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471662843635422' data-elem-id='1662843635422' data-elem-type='text' data-field-top-value="3460" data-field-top-res-320-value="643" data-field-left-value="-409" data-field-left-res-320-value="0" data-field-width-value="364" data-field-width-res-320-value="230" data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="" data-field-widthunits-value="px"><div style="display: none;" id="weekendText" class='tn-atom' field='tn_text_1662843635422'>It's the weekend!</div> </div> 
+<div class='t396__elem tn-elem tn-elem__4816680471662843584783' data-elem-id='1662843584783' data-elem-type='shape' data-field-top-value="3542" data-field-top-res-320-value="368" data-field-left-value="-412" data-field-left-res-320-value="0" data-field-height-value="100" data-field-height-res-320-value="260" data-field-width-value="100" data-field-width-res-320-value="260" data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="px"><div id="weekendImg" class='tn-atom t-bgimg' style="background-image:url('');"> <!-- Менять стили фотографии (без фотки, будет просто прозрачный квадрат) --> </div> </div> </div></div><script>t_onReady(function () {
+t_onFuncLoad('t396_init', function () {
+t396_init('481668047');
+});
+});</script>
+
+<script>
+    
+function monday(){
+document.querySelector('#monday').style.backgroundImage = `url('ChooseWeek/Frame\ 20.png')`
+document.querySelector('#tuesday').style.backgroundImage = `url('ChooseWeek/Frame\ 25.png')`
+document.querySelector('#wednesday').style.backgroundImage = `url('ChooseWeek/Frame\ 26.png')`
+document.querySelector('#thursday').style.backgroundImage = `url('ChooseWeek/Frame\ 27.png')`
+document.querySelector('#friday').style.backgroundImage = `url('ChooseWeek/Frame\ 28.png')`
+document.querySelector('#saturday').style.backgroundImage = `url('ChooseWeek/Frame\ 29.png')`
+
+    document.querySelector('.today').innerHTML = '01 Monday'
+
+    document.querySelector('#weekendImg').style.backgroundImage = `url('')`
+    document.querySelector('#weekendText').style.display = 'none'
+
+    document.querySelector('#oneLessonText').style.display = 'block'
+    document.querySelector('#twoLessonText').style.display = 'block'
+    document.querySelector('#threeLessonText').style.display = 'block'
+    document.querySelector('#fourLessonText').style.display = 'block'
+    document.querySelector('#fiveLessonText').style.display = 'block'
+    document.querySelector('#sixLessonText').style.display = 'block'
+    document.querySelector('#sevenLessonText').style.display = 'block'
+
+    //Название предмета
+    document.querySelector('#oneLessonText').innerHTML = 'Class hour'
+    document.querySelector('#twoLessonText').innerHTML = 'Russian language'
+    document.querySelector('#threeLessonText').innerHTML = 'English Language'
+    document.querySelector('#fourLessonText').innerHTML = 'Informatics'
+    document.querySelector('#fiveLessonText').innerHTML = 'Algebra'
+    document.querySelector('#sixLessonText').innerHTML = 'Physics'
+    document.querySelector('#sevenLessonText').innerHTML = 'German Language'
+
+    //Фотография предмета
+    document.querySelector('#LessonOneImg').style.backgroundImage = `url('Lessons/Frame\ 12.png')`
+    document.querySelector('#LessonTwoImg').style.backgroundImage = `url('Lessons/Frame\ 31.png')`
+    document.querySelector('#LessonThreeImg').style.backgroundImage = `url('Lessons/Frame\ 14.png')`
+    document.querySelector('#LessonFourImg').style.backgroundImage = `url('Lessons/Frame\ 11.png')`
+    document.querySelector('#LessonFiveImg').style.backgroundImage = `url('Lessons/Frame\ 13.png')`
+    document.querySelector('#LessonSixImg').style.backgroundImage = `url('Lessons/Frame\ 9.png')`
+    document.querySelector('#LessonSevenImg').style.backgroundImage = `url('Lessons/Frame\ 30.png')`
+
+    document.querySelector('#oneTime').style.display = 'block'
+    document.querySelector('#twoTime').style.display = 'block'
+    document.querySelector('#threeTime').style.display = 'block'
+    document.querySelector('#fourTime').style.display = 'block'
+    document.querySelector('#fiveTime').style.display = 'block'
+    document.querySelector('#sixTime').style.display = 'block'
+    document.querySelector('#sevenTime').style.display = 'block'
+
+    document.querySelector('#numberOneLesson').style.display = 'block'
+    document.querySelector('#numberTwoLesson').style.display = 'block'
+    document.querySelector('#numberThreeLesson').style.display = 'block'
+    document.querySelector('#numberFourLesson').style.display = 'block'
+    document.querySelector('#numberFiveLesson').style.display = 'block'
+    document.querySelector('#numberSixLesson').style.display = 'block'
+    document.querySelector('#numberSevenLesson').style.display = 'block'
+
+    document.querySelector('#arrowOne').style.backgroundImage = `url('')`
+    document.querySelector('#arrowTwo').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowThree').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowFour').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowFive').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowSix').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowSeven').style.backgroundImage = `url('arrow.svg')`
+
+    document.querySelector('#arrowOne').href = 'classhour.html'
+    document.querySelector('#arrowTwo').href = 'russian.html'
+    document.querySelector('#arrowThree').href = 'english.html'
+    document.querySelector('#arrowFour').href = 'informatics.html'
+    document.querySelector('#arrowFive').href = 'algebra.html'
+    document.querySelector('#arrowSix').href = 'physics.html'
+    document.querySelector('#arrowSeven').href = 'deutsche.html'
+
+}
+
+function tuesday(){
+document.querySelector('#monday').style.backgroundImage = `url('ChooseWeek/Frame\ 24.png')`
+document.querySelector('#tuesday').style.backgroundImage = `url('ChooseWeek/Frame\ 19.png')`
+document.querySelector('#wednesday').style.backgroundImage = `url('ChooseWeek/Frame\ 26.png')`
+document.querySelector('#thursday').style.backgroundImage = `url('ChooseWeek/Frame\ 27.png')`
+document.querySelector('#friday').style.backgroundImage = `url('ChooseWeek/Frame\ 28.png')`
+document.querySelector('#saturday').style.backgroundImage = `url('ChooseWeek/Frame\ 29.png')`
+
+    document.querySelector('.today').innerHTML = '02 Tuesday'
+
+    document.querySelector('#weekendImg').style.backgroundImage = `url('')`
+    document.querySelector('#weekendText').style.display = 'none'
+
+    document.querySelector('#oneLessonText').style.display = 'block'
+    document.querySelector('#twoLessonText').style.display = 'block'
+    document.querySelector('#threeLessonText').style.display = 'block'
+    document.querySelector('#fourLessonText').style.display = 'block'
+    document.querySelector('#fiveLessonText').style.display = 'block'
+    document.querySelector('#sixLessonText').style.display = 'block'
+    document.querySelector('#sevenLessonText').style.display = 'block'
+
+    //Название предмета
+    document.querySelector('#oneLessonText').innerHTML = 'Geometry'
+    document.querySelector('#twoLessonText').innerHTML = 'Literature'
+    document.querySelector('#threeLessonText').innerHTML = 'Russian language'
+    document.querySelector('#fourLessonText').innerHTML = 'Geography'
+    document.querySelector('#fiveLessonText').innerHTML = 'Chemistry'
+    document.querySelector('#sixLessonText').innerHTML = 'Physical Education'
+    document.querySelector('#sevenLessonText').style.display = 'none'
+
+    //Фотография предмета
+    document.querySelector('#LessonOneImg').style.backgroundImage = `url('Lessons/Frame\ 37.png')`
+    document.querySelector('#LessonTwoImg').style.backgroundImage = `url('Lessons/Frame\ 6.png')`
+    document.querySelector('#LessonThreeImg').style.backgroundImage = `url('Lessons/Frame\ 31.png')`
+    document.querySelector('#LessonFourImg').style.backgroundImage = `url('Lessons/Frame\ 5.png')`
+    document.querySelector('#LessonFiveImg').style.backgroundImage = `url('Lessons/Frame\ 8.png')`
+    document.querySelector('#LessonSixImg').style.backgroundImage = `url('Lessons/Frame\ 7.png')`
+    document.querySelector('#LessonSevenImg').style.backgroundImage = `url('')`
+
+    document.querySelector('#oneTime').style.display = 'block'
+    document.querySelector('#twoTime').style.display = 'block'
+    document.querySelector('#threeTime').style.display = 'block'
+    document.querySelector('#fourTime').style.display = 'block'
+    document.querySelector('#fiveTime').style.display = 'block'
+    document.querySelector('#sixTime').style.display = 'block'
+    document.querySelector('#sevenTime').style.display = 'none'
+
+    document.querySelector('#numberOneLesson').style.display = 'block'
+    document.querySelector('#numberTwoLesson').style.display = 'block'
+    document.querySelector('#numberThreeLesson').style.display = 'block'
+    document.querySelector('#numberFourLesson').style.display = 'block'
+    document.querySelector('#numberFiveLesson').style.display = 'block'
+    document.querySelector('#numberSixLesson').style.display = 'block'
+    document.querySelector('#numberSevenLesson').style.display = 'none'
+
+    document.querySelector('#arrowOne').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowTwo').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowThree').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowFour').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowFive').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowSix').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowSeven').style.backgroundImage = `url('')`
+
+    document.querySelector('#arrowOne').href = 'geometry.html'
+    document.querySelector('#arrowTwo').href = 'literature.html'
+    document.querySelector('#arrowThree').href = 'russian.html'
+    document.querySelector('#arrowFour').href = 'geography.html'
+    document.querySelector('#arrowFive').href = 'chemistry.html'
+    document.querySelector('#arrowSix').href = 'pe.html'
+    document.querySelector('#arrowSeven').href = ''
+}
+
+function wednesday(){
+document.querySelector('#monday').style.backgroundImage = `url('ChooseWeek/Frame\ 24.png')`
+document.querySelector('#tuesday').style.backgroundImage = `url('ChooseWeek/Frame\ 25.png')`
+document.querySelector('#wednesday').style.backgroundImage = `url('ChooseWeek/Frame\ 18.png')`
+document.querySelector('#thursday').style.backgroundImage = `url('ChooseWeek/Frame\ 27.png')`
+document.querySelector('#friday').style.backgroundImage = `url('ChooseWeek/Frame\ 28.png')`
+document.querySelector('#saturday').style.backgroundImage = `url('ChooseWeek/Frame\ 29.png')`
+
+    document.querySelector('.today').innerHTML = '03 Wednesday'
+
+    document.querySelector('#weekendImg').style.backgroundImage = `url('')`
+    document.querySelector('#weekendText').style.display = 'none'
+
+    document.querySelector('#oneLessonText').style.display = 'block'
+    document.querySelector('#twoLessonText').style.display = 'block'
+    document.querySelector('#threeLessonText').style.display = 'block'
+    document.querySelector('#fourLessonText').style.display = 'block'
+    document.querySelector('#fiveLessonText').style.display = 'block'
+    document.querySelector('#sixLessonText').style.display = 'block'
+    document.querySelector('#sevenLessonText').style.display = 'block'
+
+    //Название предмета
+    document.querySelector('#oneLessonText').innerHTML = 'History'
+    document.querySelector('#twoLessonText').innerHTML = 'Algebra'
+    document.querySelector('#threeLessonText').innerHTML = 'Russian language'
+    document.querySelector('#fourLessonText').innerHTML = 'Biology'
+    document.querySelector('#fiveLessonText').innerHTML = 'Literature'
+    document.querySelector('#sixLessonText').innerHTML = 'Physics'
+    document.querySelector('#sevenLessonText').innerHTML = 'Physical Education'
+
+    //Фотография предмета
+    document.querySelector('#LessonOneImg').style.backgroundImage = `url('Lessons/Frame\ 36.png')`
+    document.querySelector('#LessonTwoImg').style.backgroundImage = `url('Lessons/Frame\ 13.png')`
+    document.querySelector('#LessonThreeImg').style.backgroundImage = `url('Lessons/Frame\ 31.png')`
+    document.querySelector('#LessonFourImg').style.backgroundImage = `url('Lessons/Frame\ 33.png')`
+    document.querySelector('#LessonFiveImg').style.backgroundImage = `url('Lessons/Frame\ 6.png')`
+    document.querySelector('#LessonSixImg').style.backgroundImage = `url('Lessons/Frame\ 9.png')`
+    document.querySelector('#LessonSevenImg').style.backgroundImage = `url('Lessons/Frame\ 7.png')`
+
+    document.querySelector('#oneTime').style.display = 'block'
+    document.querySelector('#twoTime').style.display = 'block'
+    document.querySelector('#threeTime').style.display = 'block'
+    document.querySelector('#fourTime').style.display = 'block'
+    document.querySelector('#fiveTime').style.display = 'block'
+    document.querySelector('#sixTime').style.display = 'block'
+    document.querySelector('#sevenTime').style.display = 'block'
+
+    document.querySelector('#numberOneLesson').style.display = 'block'
+    document.querySelector('#numberTwoLesson').style.display = 'block'
+    document.querySelector('#numberThreeLesson').style.display = 'block'
+    document.querySelector('#numberFourLesson').style.display = 'block'
+    document.querySelector('#numberFiveLesson').style.display = 'block'
+    document.querySelector('#numberSixLesson').style.display = 'block'
+    document.querySelector('#numberSevenLesson').style.display = 'block'
+
+    document.querySelector('#arrowOne').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowTwo').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowThree').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowFour').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowFive').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowSix').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowSeven').style.backgroundImage = `url('arrow.svg')`
+
+    document.querySelector('#arrowOne').href = 'history.html'
+    document.querySelector('#arrowTwo').href = 'algebra.html'
+    document.querySelector('#arrowThree').href = 'russian.html'
+    document.querySelector('#arrowFour').href = 'biology.html'
+    document.querySelector('#arrowFive').href = 'literature.html'
+    document.querySelector('#arrowSix').href = 'physics.html'
+    document.querySelector('#arrowSeven').href = 'pe.html'
+}
+
+function thursday(){
+document.querySelector('#monday').style.backgroundImage = `url('ChooseWeek/Frame\ 24.png')`
+document.querySelector('#tuesday').style.backgroundImage = `url('ChooseWeek/Frame\ 25.png')`
+document.querySelector('#wednesday').style.backgroundImage = `url('ChooseWeek/Frame\ 26.png')`
+document.querySelector('#thursday').style.backgroundImage = `url('ChooseWeek/Frame\ 21.png')`
+document.querySelector('#friday').style.backgroundImage = `url('ChooseWeek/Frame\ 28.png')`
+document.querySelector('#saturday').style.backgroundImage = `url('ChooseWeek/Frame\ 29.png')`
+
+    document.querySelector('.today').innerHTML = '04 Thursday'
+
+    document.querySelector('#weekendImg').style.backgroundImage = `url('')`
+    document.querySelector('#weekendText').style.display = 'none'
+
+    document.querySelector('#oneLessonText').style.display = 'block'
+    document.querySelector('#twoLessonText').style.display = 'block'
+    document.querySelector('#threeLessonText').style.display = 'block'
+    document.querySelector('#fourLessonText').style.display = 'block'
+    document.querySelector('#fiveLessonText').style.display = 'block'
+    document.querySelector('#sixLessonText').style.display = 'block'
+    document.querySelector('#sevenLessonText').style.display = 'block'
+
+    //Название предмета
+    document.querySelector('#oneLessonText').innerHTML = 'Geometry'
+    document.querySelector('#twoLessonText').innerHTML = 'Geography'
+    document.querySelector('#threeLessonText').innerHTML = 'Russian language'
+    document.querySelector('#fourLessonText').innerHTML = 'Chemistry'
+    document.querySelector('#fiveLessonText').innerHTML = 'OBZH'
+    document.querySelector('#sixLessonText').innerHTML = 'English Language'
+    document.querySelector('#sevenLessonText').innerHTML = 'History'
+
+    //Фотография предмета
+    document.querySelector('#LessonOneImg').style.backgroundImage = `url('Lessons/Frame\ 37.png')`
+    document.querySelector('#LessonTwoImg').style.backgroundImage = `url('Lessons/Frame\ 5.png')`
+    document.querySelector('#LessonThreeImg').style.backgroundImage = `url('Lessons/Frame\ 31.png')`
+    document.querySelector('#LessonFourImg').style.backgroundImage = `url('Lessons/Frame\ 8.png')`
+    document.querySelector('#LessonFiveImg').style.backgroundImage = `url('Lessons/Frame\ 35.png')`
+    document.querySelector('#LessonSixImg').style.backgroundImage = `url('Lessons/Frame\ 14.png')`
+    document.querySelector('#LessonSevenImg').style.backgroundImage = `url('Lessons/Frame\ 36.png')`
+
+    document.querySelector('#oneTime').style.display = 'block'
+    document.querySelector('#twoTime').style.display = 'block'
+    document.querySelector('#threeTime').style.display = 'block'
+    document.querySelector('#fourTime').style.display = 'block'
+    document.querySelector('#fiveTime').style.display = 'block'
+    document.querySelector('#sixTime').style.display = 'block'
+    document.querySelector('#sevenTime').style.display = 'block'
+
+    document.querySelector('#numberOneLesson').style.display = 'block'
+    document.querySelector('#numberTwoLesson').style.display = 'block'
+    document.querySelector('#numberThreeLesson').style.display = 'block'
+    document.querySelector('#numberFourLesson').style.display = 'block'
+    document.querySelector('#numberFiveLesson').style.display = 'block'
+    document.querySelector('#numberSixLesson').style.display = 'block'
+    document.querySelector('#numberSevenLesson').style.display = 'block'
+
+    document.querySelector('#arrowOne').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowTwo').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowThree').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowFour').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowFive').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowSix').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowSeven').style.backgroundImage = `url('arrow.svg')`
+
+    document.querySelector('#arrowOne').href = 'geometry.html'
+    document.querySelector('#arrowTwo').href = 'geography.html'
+    document.querySelector('#arrowThree').href = 'russian.html'
+    document.querySelector('#arrowFour').href = 'chemistry.html'
+    document.querySelector('#arrowFive').href = 'obzh.html'
+    document.querySelector('#arrowSix').href = 'english.html'
+    document.querySelector('#arrowSeven').href = 'history.html'
+}
+
+function friday(){
+document.querySelector('#monday').style.backgroundImage = `url('ChooseWeek/Frame\ 24.png')`
+document.querySelector('#tuesday').style.backgroundImage = `url('ChooseWeek/Frame\ 25.png')`
+document.querySelector('#wednesday').style.backgroundImage = `url('ChooseWeek/Frame\ 26.png')`
+document.querySelector('#thursday').style.backgroundImage = `url('ChooseWeek/Frame\ 27.png')`
+document.querySelector('#friday').style.backgroundImage = `url('ChooseWeek/Frame\ 22.png')`
+document.querySelector('#saturday').style.backgroundImage = `url('ChooseWeek/Frame\ 29.png')`
+
+    document.querySelector('.today').innerHTML = '05 Friday'
+
+    document.querySelector('#weekendImg').style.backgroundImage = `url('')`
+    document.querySelector('#weekendText').style.display = 'none'
+
+    document.querySelector('#oneLessonText').style.display = 'block'
+    document.querySelector('#twoLessonText').style.display = 'block'
+    document.querySelector('#threeLessonText').style.display = 'block'
+    document.querySelector('#fourLessonText').style.display = 'block'
+    document.querySelector('#fiveLessonText').style.display = 'block'
+    document.querySelector('#sixLessonText').style.display = 'block'
+    document.querySelector('#sevenLessonText').style.display = 'block'
+
+    //Название предмета
+    document.querySelector('#oneLessonText').innerHTML = 'Physics'
+    document.querySelector('#twoLessonText').innerHTML = 'Social Studies'
+    document.querySelector('#threeLessonText').innerHTML = 'Biology'
+    document.querySelector('#fourLessonText').innerHTML = 'Algebra'
+    document.querySelector('#fiveLessonText').innerHTML = 'Native culture'
+    document.querySelector('#sixLessonText').innerHTML = 'Literature'
+    document.querySelector('#sevenLessonText').innerHTML = 'Algebra 2'
+
+    //Фотография предмета
+    document.querySelector('#LessonOneImg').style.backgroundImage = `url('Lessons/Frame\ 9.png')`
+    document.querySelector('#LessonTwoImg').style.backgroundImage = `url('Lessons/Frame\ 32.png')`
+    document.querySelector('#LessonThreeImg').style.backgroundImage = `url('Lessons/Frame\ 33.png')`
+    document.querySelector('#LessonFourImg').style.backgroundImage = `url('Lessons/Frame\ 13.png')`
+    document.querySelector('#LessonFiveImg').style.backgroundImage = `url('Lessons/Frame\ 34.png')`
+    document.querySelector('#LessonSixImg').style.backgroundImage = `url('Lessons/Frame\ 6.png')`
+    document.querySelector('#LessonSevenImg').style.backgroundImage = `url('Lessons/Frame\ 13.png')`
+
+    document.querySelector('#oneTime').style.display = 'block'
+    document.querySelector('#twoTime').style.display = 'block'
+    document.querySelector('#threeTime').style.display = 'block'
+    document.querySelector('#fourTime').style.display = 'block'
+    document.querySelector('#fiveTime').style.display = 'block'
+    document.querySelector('#sixTime').style.display = 'block'
+    document.querySelector('#sevenTime').style.display = 'block'
+
+    document.querySelector('#numberOneLesson').style.display = 'block'
+    document.querySelector('#numberTwoLesson').style.display = 'block'
+    document.querySelector('#numberThreeLesson').style.display = 'block'
+    document.querySelector('#numberFourLesson').style.display = 'block'
+    document.querySelector('#numberFiveLesson').style.display = 'block'
+    document.querySelector('#numberSixLesson').style.display = 'block'
+    document.querySelector('#numberSevenLesson').style.display = 'block'
+
+    document.querySelector('#arrowOne').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowTwo').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowThree').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowFour').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowFive').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowSix').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowSeven').style.backgroundImage = `url('arrow.svg')`
+
+    document.querySelector('#arrowOne').href = 'physics.html'
+    document.querySelector('#arrowTwo').href = 'social.html'
+    document.querySelector('#arrowThree').href = 'biology.html'
+    document.querySelector('#arrowFour').href = 'algebra.html'
+    document.querySelector('#arrowFive').href = 'nativeculture.html'
+    document.querySelector('#arrowSix').href = 'literature.html'
+    document.querySelector('#arrowSeven').href = 'algebra.html'
+}
+
+function saturday(){
+document.querySelector('#monday').style.backgroundImage = `url('ChooseWeek/Frame\ 24.png')`
+document.querySelector('#tuesday').style.backgroundImage = `url('ChooseWeek/Frame\ 25.png')`
+document.querySelector('#wednesday').style.backgroundImage = `url('ChooseWeek/Frame\ 26.png')`
+document.querySelector('#thursday').style.backgroundImage = `url('ChooseWeek/Frame\ 27.png')`
+document.querySelector('#friday').style.backgroundImage = `url('ChooseWeek/Frame\ 28.png')`
+document.querySelector('#saturday').style.backgroundImage = `url('ChooseWeek/Frame\ 23.png')`
+
+    document.querySelector('.today').innerHTML = '06 Saturday'
+
+    document.querySelector('#weekendImg').style.backgroundImage = `url('https://thumb.tildacdn.com/tild3064-3133-4538-a636-306331373535/-/format/webp/Weekend.png')`
+    document.querySelector('#weekendText').style.display = 'block'
+
+    document.querySelector('#oneLessonText').style.display = 'none'
+    document.querySelector('#twoLessonText').style.display = 'none'
+    document.querySelector('#threeLessonText').style.display = 'none'
+    document.querySelector('#fourLessonText').style.display = 'none'
+    document.querySelector('#fiveLessonText').style.display = 'none'
+    document.querySelector('#sixLessonText').style.display = 'none'
+    document.querySelector('#sevenLessonText').style.display = 'none'
+
+    document.querySelector('#oneTime').style.display = 'none'
+    document.querySelector('#twoTime').style.display = 'none'
+    document.querySelector('#threeTime').style.display = 'none'
+    document.querySelector('#fourTime').style.display = 'none'
+    document.querySelector('#fiveTime').style.display = 'none'
+    document.querySelector('#sixTime').style.display = 'none'
+    document.querySelector('#sevenTime').style.display = 'none'
+
+    document.querySelector('#LessonOneImg').style.backgroundImage = `url('')`
+    document.querySelector('#LessonTwoImg').style.backgroundImage = `url('')`
+    document.querySelector('#LessonThreeImg').style.backgroundImage = `url('')`
+    document.querySelector('#LessonFourImg').style.backgroundImage = `url('')`
+    document.querySelector('#LessonFiveImg').style.backgroundImage = `url('')`
+    document.querySelector('#LessonSixImg').style.backgroundImage = `url('')`
+    document.querySelector('#LessonSevenImg').style.backgroundImage = `url('')`
+
+    document.querySelector('#numberOneLesson').style.display = 'none'
+    document.querySelector('#numberTwoLesson').style.display = 'none'
+    document.querySelector('#numberThreeLesson').style.display = 'none'
+    document.querySelector('#numberFourLesson').style.display = 'none'
+    document.querySelector('#numberFiveLesson').style.display = 'none'
+    document.querySelector('#numberSixLesson').style.display = 'none'
+    document.querySelector('#numberSevenLesson').style.display = 'none'
+
+    document.querySelector('#arrowOne').style.backgroundImage = `url('')`
+    document.querySelector('#arrowTwo').style.backgroundImage = `url('')`
+    document.querySelector('#arrowThree').style.backgroundImage = `url('')`
+    document.querySelector('#arrowFour').style.backgroundImage = `url('')`
+    document.querySelector('#arrowFive').style.backgroundImage = `url('')`
+    document.querySelector('#arrowSix').style.backgroundImage = `url('')`
+    document.querySelector('#arrowSeven').style.backgroundImage = `url('')`
+}
+    
+    
+</script>
+
+<script>
+    
+        
+
+    function todayWeek(){
+  var days = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday'
+];
+var d = new Date();
+var n = d.getDay();
+let text = document.querySelector('.text')
+let today = document.querySelector('.today')
+let number = document.querySelector('.number')
+text.innerHTML = (days[n]);
+
+
+if(text.textContent == 'Monday'){
+  today.innerHTML = "01  Monday"
+}
+
+if(text.textContent == 'Tuesday'){
+  today.innerHTML = "02  Tuesday"
+}
+
+if(text.textContent == 'Wednesday'){
+  today.innerHTML = "03  Wednesday"
+}
+
+if(text.textContent == 'Thursday'){
+  today.innerHTML = "04  Thursday"
+}
+
+if(text.textContent == 'Friday'){
+  today.innerHTML = "05  Friday"
+}
+
+if(text.textContent == 'Saturday'){
+  today.innerHTML = "06  Saturday"
+}
+
+if(text.textContent == 'Sunday'){
+  today.innerHTML = "07  Sunday"
+}
+
+
+
+
+
+
+
+
+// Автоматическая часть
+
+if(text.textContent == 'Monday'){
+    number.innerHTML = "Today's 7 lessons"
+
+    document.querySelector('#weekendImg').style.backgroundImage = `url('')`
+    document.querySelector('#weekendText').style.display = 'none'
+
+    document.querySelector('#oneLessonText').style.display = 'block'
+    document.querySelector('#twoLessonText').style.display = 'block'
+    document.querySelector('#threeLessonText').style.display = 'block'
+    document.querySelector('#fourLessonText').style.display = 'block'
+    document.querySelector('#fiveLessonText').style.display = 'block'
+    document.querySelector('#sixLessonText').style.display = 'block'
+    document.querySelector('#sevenLessonText').style.display = 'block'
+
+    //Название предмета
+    document.querySelector('#oneLessonText').innerHTML = 'Class hour'
+    document.querySelector('#twoLessonText').innerHTML = 'Russian language'
+    document.querySelector('#threeLessonText').innerHTML = 'English Language'
+    document.querySelector('#fourLessonText').innerHTML = 'Informatics'
+    document.querySelector('#fiveLessonText').innerHTML = 'Algebra'
+    document.querySelector('#sixLessonText').innerHTML = 'Physics'
+    document.querySelector('#sevenLessonText').innerHTML = 'German Language'
+
+    //Фотография предмета
+    document.querySelector('#LessonOneImg').style.backgroundImage = `url('Lessons/Frame\ 12.png')`
+    document.querySelector('#LessonTwoImg').style.backgroundImage = `url('Lessons/Frame\ 31.png')`
+    document.querySelector('#LessonThreeImg').style.backgroundImage = `url('Lessons/Frame\ 14.png')`
+    document.querySelector('#LessonFourImg').style.backgroundImage = `url('Lessons/Frame\ 11.png')`
+    document.querySelector('#LessonFiveImg').style.backgroundImage = `url('Lessons/Frame\ 13.png')`
+    document.querySelector('#LessonSixImg').style.backgroundImage = `url('Lessons/Frame\ 9.png')`
+    document.querySelector('#LessonSevenImg').style.backgroundImage = `url('Lessons/Frame\ 30.png')`
+
+    document.querySelector('#oneTime').style.display = 'block'
+    document.querySelector('#twoTime').style.display = 'block'
+    document.querySelector('#threeTime').style.display = 'block'
+    document.querySelector('#fourTime').style.display = 'block'
+    document.querySelector('#fiveTime').style.display = 'block'
+    document.querySelector('#sixTime').style.display = 'block'
+    document.querySelector('#sevenTime').style.display = 'block'
+
+    document.querySelector('#numberOneLesson').style.display = 'block'
+    document.querySelector('#numberTwoLesson').style.display = 'block'
+    document.querySelector('#numberThreeLesson').style.display = 'block'
+    document.querySelector('#numberFourLesson').style.display = 'block'
+    document.querySelector('#numberFiveLesson').style.display = 'block'
+    document.querySelector('#numberSixLesson').style.display = 'block'
+    document.querySelector('#numberSevenLesson').style.display = 'block'
+
+    document.querySelector('#arrowOne').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowTwo').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowThree').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowFour').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowFive').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowSix').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowSeven').style.backgroundImage = `url('arrow.svg')`
+
+    document.querySelector('#arrowOne').href = 'classhour.html'
+    document.querySelector('#arrowTwo').href = 'russian.html'
+    document.querySelector('#arrowThree').href = 'english.html'
+    document.querySelector('#arrowFour').href = 'informatics.html'
+    document.querySelector('#arrowFive').href = 'algebra.html'
+    document.querySelector('#arrowSix').href = 'physics.html'
+    document.querySelector('#arrowSeven').href = 'deutsche.html'
+}
+
+if(text.textContent == 'Tuesday'){
+    number.innerHTML = "Today's 6 lessons"
+
+    document.querySelector('#weekendImg').style.backgroundImage = `url('')`
+    document.querySelector('#weekendText').style.display = 'none'
+
+    document.querySelector('#oneLessonText').style.display = 'block'
+    document.querySelector('#twoLessonText').style.display = 'block'
+    document.querySelector('#threeLessonText').style.display = 'block'
+    document.querySelector('#fourLessonText').style.display = 'block'
+    document.querySelector('#fiveLessonText').style.display = 'block'
+    document.querySelector('#sixLessonText').style.display = 'block'
+    document.querySelector('#sevenLessonText').style.display = 'block'
+
+    //Название предмета
+    document.querySelector('#oneLessonText').innerHTML = 'Geometry'
+    document.querySelector('#twoLessonText').innerHTML = 'Literature'
+    document.querySelector('#threeLessonText').innerHTML = 'Russian language'
+    document.querySelector('#fourLessonText').innerHTML = 'Geography'
+    document.querySelector('#fiveLessonText').innerHTML = 'Chemistry'
+    document.querySelector('#sixLessonText').innerHTML = 'Physical Education'
+    document.querySelector('#sevenLessonText').style.display = 'none'
+
+    //Фотография предмета
+    document.querySelector('#LessonOneImg').style.backgroundImage = `url('Lessons/Frame\ 37.png')`
+    document.querySelector('#LessonTwoImg').style.backgroundImage = `url('Lessons/Frame\ 6.png')`
+    document.querySelector('#LessonThreeImg').style.backgroundImage = `url('Lessons/Frame\ 31.png')`
+    document.querySelector('#LessonFourImg').style.backgroundImage = `url('Lessons/Frame\ 5.png')`
+    document.querySelector('#LessonFiveImg').style.backgroundImage = `url('Lessons/Frame\ 8.png')`
+    document.querySelector('#LessonSixImg').style.backgroundImage = `url('Lessons/Frame\ 7.png')`
+    document.querySelector('#LessonSevenImg').style.backgroundImage = `url('')`
+
+    document.querySelector('#oneTime').style.display = 'block'
+    document.querySelector('#twoTime').style.display = 'block'
+    document.querySelector('#threeTime').style.display = 'block'
+    document.querySelector('#fourTime').style.display = 'block'
+    document.querySelector('#fiveTime').style.display = 'block'
+    document.querySelector('#sixTime').style.display = 'block'
+    document.querySelector('#sevenTime').style.display = 'none'
+
+    document.querySelector('#numberOneLesson').style.display = 'block'
+    document.querySelector('#numberTwoLesson').style.display = 'block'
+    document.querySelector('#numberThreeLesson').style.display = 'block'
+    document.querySelector('#numberFourLesson').style.display = 'block'
+    document.querySelector('#numberFiveLesson').style.display = 'block'
+    document.querySelector('#numberSixLesson').style.display = 'block'
+    document.querySelector('#numberSevenLesson').style.display = 'none'
+
+    document.querySelector('#arrowOne').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowTwo').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowThree').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowFour').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowFive').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowSix').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowSeven').style.backgroundImage = `url('')`
+
+    document.querySelector('#arrowOne').href = 'geometry.html'
+    document.querySelector('#arrowTwo').href = 'literature.html'
+    document.querySelector('#arrowThree').href = 'russian.html'
+    document.querySelector('#arrowFour').href = 'geography.html'
+    document.querySelector('#arrowFive').href = 'chemistry.html'
+    document.querySelector('#arrowSix').href = 'pe.html'
+    document.querySelector('#arrowSeven').href = ''
+}
+
+if(text.textContent == 'Wednesday'){
+    number.innerHTML = "Today's 7 lessons"
+
+    document.querySelector('#weekendImg').style.backgroundImage = `url('')`
+    document.querySelector('#weekendText').style.display = 'none'
+
+    document.querySelector('#oneLessonText').style.display = 'block'
+    document.querySelector('#twoLessonText').style.display = 'block'
+    document.querySelector('#threeLessonText').style.display = 'block'
+    document.querySelector('#fourLessonText').style.display = 'block'
+    document.querySelector('#fiveLessonText').style.display = 'block'
+    document.querySelector('#sixLessonText').style.display = 'block'
+    document.querySelector('#sevenLessonText').style.display = 'block'
+
+    //Название предмета
+    document.querySelector('#oneLessonText').innerHTML = 'History'
+    document.querySelector('#twoLessonText').innerHTML = 'Algebra'
+    document.querySelector('#threeLessonText').innerHTML = 'Russian language'
+    document.querySelector('#fourLessonText').innerHTML = 'Biology'
+    document.querySelector('#fiveLessonText').innerHTML = 'Literature'
+    document.querySelector('#sixLessonText').innerHTML = 'Physics'
+    document.querySelector('#sevenLessonText').innerHTML = 'Physical Education'
+
+    //Фотография предмета
+    document.querySelector('#LessonOneImg').style.backgroundImage = `url('Lessons/Frame\ 36.png')`
+    document.querySelector('#LessonTwoImg').style.backgroundImage = `url('Lessons/Frame\ 13.png')`
+    document.querySelector('#LessonThreeImg').style.backgroundImage = `url('Lessons/Frame\ 31.png')`
+    document.querySelector('#LessonFourImg').style.backgroundImage = `url('Lessons/Frame\ 33.png')`
+    document.querySelector('#LessonFiveImg').style.backgroundImage = `url('Lessons/Frame\ 6.png')`
+    document.querySelector('#LessonSixImg').style.backgroundImage = `url('Lessons/Frame\ 9.png')`
+    document.querySelector('#LessonSevenImg').style.backgroundImage = `url('Lessons/Frame\ 7.png')`
+
+    document.querySelector('#oneTime').style.display = 'block'
+    document.querySelector('#twoTime').style.display = 'block'
+    document.querySelector('#threeTime').style.display = 'block'
+    document.querySelector('#fourTime').style.display = 'block'
+    document.querySelector('#fiveTime').style.display = 'block'
+    document.querySelector('#sixTime').style.display = 'block'
+    document.querySelector('#sevenTime').style.display = 'block'
+
+    document.querySelector('#numberOneLesson').style.display = 'block'
+    document.querySelector('#numberTwoLesson').style.display = 'block'
+    document.querySelector('#numberThreeLesson').style.display = 'block'
+    document.querySelector('#numberFourLesson').style.display = 'block'
+    document.querySelector('#numberFiveLesson').style.display = 'block'
+    document.querySelector('#numberSixLesson').style.display = 'block'
+    document.querySelector('#numberSevenLesson').style.display = 'block'
+
+    document.querySelector('#arrowOne').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowTwo').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowThree').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowFour').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowFive').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowSix').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowSeven').style.backgroundImage = `url('arrow.svg')`
+
+    document.querySelector('#arrowOne').href = 'history.html'
+    document.querySelector('#arrowTwo').href = 'algebra.html'
+    document.querySelector('#arrowThree').href = 'russian.html'
+    document.querySelector('#arrowFour').href = 'biology.html'
+    document.querySelector('#arrowFive').href = 'literature.html'
+    document.querySelector('#arrowSix').href = 'physics.html'
+    document.querySelector('#arrowSeven').href = 'pe.html'
+}
+
+if(text.textContent == 'Thursday'){
+    number.innerHTML = "Today's 7 lessons"
+
+    document.querySelector('#weekendImg').style.backgroundImage = `url('')`
+    document.querySelector('#weekendText').style.display = 'none'
+
+    document.querySelector('#oneLessonText').style.display = 'block'
+    document.querySelector('#twoLessonText').style.display = 'block'
+    document.querySelector('#threeLessonText').style.display = 'block'
+    document.querySelector('#fourLessonText').style.display = 'block'
+    document.querySelector('#fiveLessonText').style.display = 'block'
+    document.querySelector('#sixLessonText').style.display = 'block'
+    document.querySelector('#sevenLessonText').style.display = 'block'
+
+    //Название предмета
+    document.querySelector('#oneLessonText').innerHTML = 'Geometry'
+    document.querySelector('#twoLessonText').innerHTML = 'Geography'
+    document.querySelector('#threeLessonText').innerHTML = 'Russian language'
+    document.querySelector('#fourLessonText').innerHTML = 'Chemistry'
+    document.querySelector('#fiveLessonText').innerHTML = 'OBZH'
+    document.querySelector('#sixLessonText').innerHTML = 'English Language'
+    document.querySelector('#sevenLessonText').innerHTML = 'History'
+
+    //Фотография предмета
+    document.querySelector('#LessonOneImg').style.backgroundImage = `url('Lessons/Frame\ 37.png')`
+    document.querySelector('#LessonTwoImg').style.backgroundImage = `url('Lessons/Frame\ 5.png')`
+    document.querySelector('#LessonThreeImg').style.backgroundImage = `url('Lessons/Frame\ 31.png')`
+    document.querySelector('#LessonFourImg').style.backgroundImage = `url('Lessons/Frame\ 8.png')`
+    document.querySelector('#LessonFiveImg').style.backgroundImage = `url('Lessons/Frame\ 35.png')`
+    document.querySelector('#LessonSixImg').style.backgroundImage = `url('Lessons/Frame\ 14.png')`
+    document.querySelector('#LessonSevenImg').style.backgroundImage = `url('Lessons/Frame\ 36.png')`
+
+    document.querySelector('#oneTime').style.display = 'block'
+    document.querySelector('#twoTime').style.display = 'block'
+    document.querySelector('#threeTime').style.display = 'block'
+    document.querySelector('#fourTime').style.display = 'block'
+    document.querySelector('#fiveTime').style.display = 'block'
+    document.querySelector('#sixTime').style.display = 'block'
+    document.querySelector('#sevenTime').style.display = 'block'
+
+    document.querySelector('#numberOneLesson').style.display = 'block'
+    document.querySelector('#numberTwoLesson').style.display = 'block'
+    document.querySelector('#numberThreeLesson').style.display = 'block'
+    document.querySelector('#numberFourLesson').style.display = 'block'
+    document.querySelector('#numberFiveLesson').style.display = 'block'
+    document.querySelector('#numberSixLesson').style.display = 'block'
+    document.querySelector('#numberSevenLesson').style.display = 'block'
+
+    document.querySelector('#arrowOne').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowTwo').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowThree').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowFour').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowFive').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowSix').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowSeven').style.backgroundImage = `url('arrow.svg')`
+
+    document.querySelector('#arrowOne').href = 'geometry.html'
+    document.querySelector('#arrowTwo').href = 'geography.html'
+    document.querySelector('#arrowThree').href = 'russian.html'
+    document.querySelector('#arrowFour').href = 'chemistry.html'
+    document.querySelector('#arrowFive').href = 'obzh.html'
+    document.querySelector('#arrowSix').href = 'english.html'
+    document.querySelector('#arrowSeven').href = 'history.html'
+}
+
+if(text.textContent == 'Friday'){
+    number.innerHTML = "Today's 7 lessons"
+
+    document.querySelector('#weekendImg').style.backgroundImage = `url('')`
+    document.querySelector('#weekendText').style.display = 'none'
+
+    document.querySelector('#oneLessonText').style.display = 'block'
+    document.querySelector('#twoLessonText').style.display = 'block'
+    document.querySelector('#threeLessonText').style.display = 'block'
+    document.querySelector('#fourLessonText').style.display = 'block'
+    document.querySelector('#fiveLessonText').style.display = 'block'
+    document.querySelector('#sixLessonText').style.display = 'block'
+    document.querySelector('#sevenLessonText').style.display = 'block'
+
+    //Название предмета
+    document.querySelector('#oneLessonText').innerHTML = 'Physics'
+    document.querySelector('#twoLessonText').innerHTML = 'Social Studies'
+    document.querySelector('#threeLessonText').innerHTML = 'Biology'
+    document.querySelector('#fourLessonText').innerHTML = 'Algebra'
+    document.querySelector('#fiveLessonText').innerHTML = 'Native culture'
+    document.querySelector('#sixLessonText').innerHTML = 'Literature'
+    document.querySelector('#sevenLessonText').innerHTML = 'Algebra 2'
+
+    //Фотография предмета
+    document.querySelector('#LessonOneImg').style.backgroundImage = `url('Lessons/Frame\ 9.png')`
+    document.querySelector('#LessonTwoImg').style.backgroundImage = `url('Lessons/Frame\ 32.png')`
+    document.querySelector('#LessonThreeImg').style.backgroundImage = `url('Lessons/Frame\ 33.png')`
+    document.querySelector('#LessonFourImg').style.backgroundImage = `url('Lessons/Frame\ 13.png')`
+    document.querySelector('#LessonFiveImg').style.backgroundImage = `url('Lessons/Frame\ 34.png')`
+    document.querySelector('#LessonSixImg').style.backgroundImage = `url('Lessons/Frame\ 6.png')`
+    document.querySelector('#LessonSevenImg').style.backgroundImage = `url('Lessons/Frame\ 13.png')`
+
+    document.querySelector('#oneTime').style.display = 'block'
+    document.querySelector('#twoTime').style.display = 'block'
+    document.querySelector('#threeTime').style.display = 'block'
+    document.querySelector('#fourTime').style.display = 'block'
+    document.querySelector('#fiveTime').style.display = 'block'
+    document.querySelector('#sixTime').style.display = 'block'
+    document.querySelector('#sevenTime').style.display = 'block'
+
+    document.querySelector('#numberOneLesson').style.display = 'block'
+    document.querySelector('#numberTwoLesson').style.display = 'block'
+    document.querySelector('#numberThreeLesson').style.display = 'block'
+    document.querySelector('#numberFourLesson').style.display = 'block'
+    document.querySelector('#numberFiveLesson').style.display = 'block'
+    document.querySelector('#numberSixLesson').style.display = 'block'
+    document.querySelector('#numberSevenLesson').style.display = 'block'
+
+    document.querySelector('#arrowOne').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowTwo').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowThree').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowFour').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowFive').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowSix').style.backgroundImage = `url('arrow.svg')`
+    document.querySelector('#arrowSeven').style.backgroundImage = `url('arrow.svg')`
+
+    document.querySelector('#arrowOne').href = 'physics.html'
+    document.querySelector('#arrowTwo').href = 'social.html'
+    document.querySelector('#arrowThree').href = 'biology.html'
+    document.querySelector('#arrowFour').href = 'algebra.html'
+    document.querySelector('#arrowFive').href = 'nativeculture.html'
+    document.querySelector('#arrowSix').href = 'literature.html'
+    document.querySelector('#arrowSeven').href = 'algebra.html'
+}
+
+if(text.textContent == 'Saturday'){
+    number.innerHTML = "It's the weekend!"
+
+    document.querySelector('#weekendImg').style.backgroundImage = `url('https://thumb.tildacdn.com/tild3064-3133-4538-a636-306331373535/-/format/webp/Weekend.png')`
+    document.querySelector('#weekendText').style.display = 'block'
+
+    document.querySelector('#oneLessonText').style.display = 'none'
+    document.querySelector('#twoLessonText').style.display = 'none'
+    document.querySelector('#threeLessonText').style.display = 'none'
+    document.querySelector('#fourLessonText').style.display = 'none'
+    document.querySelector('#fiveLessonText').style.display = 'none'
+    document.querySelector('#sixLessonText').style.display = 'none'
+    document.querySelector('#sevenLessonText').style.display = 'none'
+
+    document.querySelector('#oneTime').style.display = 'none'
+    document.querySelector('#twoTime').style.display = 'none'
+    document.querySelector('#threeTime').style.display = 'none'
+    document.querySelector('#fourTime').style.display = 'none'
+    document.querySelector('#fiveTime').style.display = 'none'
+    document.querySelector('#sixTime').style.display = 'none'
+    document.querySelector('#sevenTime').style.display = 'none'
+
+    document.querySelector('#LessonOneImg').style.backgroundImage = `url('')`
+    document.querySelector('#LessonTwoImg').style.backgroundImage = `url('')`
+    document.querySelector('#LessonThreeImg').style.backgroundImage = `url('')`
+    document.querySelector('#LessonFourImg').style.backgroundImage = `url('')`
+    document.querySelector('#LessonFiveImg').style.backgroundImage = `url('')`
+    document.querySelector('#LessonSixImg').style.backgroundImage = `url('')`
+    document.querySelector('#LessonSevenImg').style.backgroundImage = `url('')`
+
+    document.querySelector('#numberOneLesson').style.display = 'none'
+    document.querySelector('#numberTwoLesson').style.display = 'none'
+    document.querySelector('#numberThreeLesson').style.display = 'none'
+    document.querySelector('#numberFourLesson').style.display = 'none'
+    document.querySelector('#numberFiveLesson').style.display = 'none'
+    document.querySelector('#numberSixLesson').style.display = 'none'
+    document.querySelector('#numberSevenLesson').style.display = 'none'
+
+    document.querySelector('#arrowOne').style.backgroundImage = `url('')`
+    document.querySelector('#arrowTwo').style.backgroundImage = `url('')`
+    document.querySelector('#arrowThree').style.backgroundImage = `url('')`
+    document.querySelector('#arrowFour').style.backgroundImage = `url('')`
+    document.querySelector('#arrowFive').style.backgroundImage = `url('')`
+    document.querySelector('#arrowSix').style.backgroundImage = `url('')`
+    document.querySelector('#arrowSeven').style.backgroundImage = `url('')`
+}
+
+if(text.textContent == 'Sunday'){
+    number.innerHTML = "It's the weekend!"
+    
+    document.querySelector('#weekendImg').style.backgroundImage = `url('https://thumb.tildacdn.com/tild3064-3133-4538-a636-306331373535/-/format/webp/Weekend.png')`
+    document.querySelector('#weekendText').style.display = 'block'
+    
+    document.querySelector('#oneLessonText').style.display = 'none'
+    document.querySelector('#twoLessonText').style.display = 'none'
+    document.querySelector('#threeLessonText').style.display = 'none'
+    document.querySelector('#fourLessonText').style.display = 'none'
+    document.querySelector('#fiveLessonText').style.display = 'none'
+    document.querySelector('#sixLessonText').style.display = 'none'
+    document.querySelector('#sevenLessonText').style.display = 'none'
+
+    document.querySelector('#oneTime').style.display = 'none'
+    document.querySelector('#twoTime').style.display = 'none'
+    document.querySelector('#threeTime').style.display = 'none'
+    document.querySelector('#fourTime').style.display = 'none'
+    document.querySelector('#fiveTime').style.display = 'none'
+    document.querySelector('#sixTime').style.display = 'none'
+    document.querySelector('#sevenTime').style.display = 'none'
+
+    document.querySelector('#LessonOneImg').style.backgroundImage = `url('')`
+    document.querySelector('#LessonTwoImg').style.backgroundImage = `url('')`
+    document.querySelector('#LessonThreeImg').style.backgroundImage = `url('')`
+    document.querySelector('#LessonFourImg').style.backgroundImage = `url('')`
+    document.querySelector('#LessonFiveImg').style.backgroundImage = `url('')`
+    document.querySelector('#LessonSixImg').style.backgroundImage = `url('')`
+    document.querySelector('#LessonSevenImg').style.backgroundImage = `url('')`
+
+    document.querySelector('#numberOneLesson').style.display = 'none'
+    document.querySelector('#numberTwoLesson').style.display = 'none'
+    document.querySelector('#numberThreeLesson').style.display = 'none'
+    document.querySelector('#numberFourLesson').style.display = 'none'
+    document.querySelector('#numberFiveLesson').style.display = 'none'
+    document.querySelector('#numberSixLesson').style.display = 'none'
+    document.querySelector('#numberSevenLesson').style.display = 'none'
+
+    document.querySelector('#arrowOne').style.backgroundImage = `url('')`
+    document.querySelector('#arrowTwo').style.backgroundImage = `url('')`
+    document.querySelector('#arrowThree').style.backgroundImage = `url('')`
+    document.querySelector('#arrowFour').style.backgroundImage = `url('')`
+    document.querySelector('#arrowFive').style.backgroundImage = `url('')`
+    document.querySelector('#arrowSix').style.backgroundImage = `url('')`
+    document.querySelector('#arrowSeven').style.backgroundImage = `url('')`
+    
+}
+  }
+
+setInterval(todayWeek, 90000000)
+todayWeek();    
+        
+    </script>
+
+    <script>
+      
+      function AutoWeek(){
+  var days = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday'
+];
+var d = new Date();
+var n = d.getDay();
+let text = document.querySelector('.text')
+let today = document.querySelector('.today')
+let number = document.querySelector('.number')
+text.innerHTML = (days[n]);
+
+
+if(text.textContent == 'Monday'){
+document.querySelector('#monday').style.backgroundImage = `url('ChooseWeek/Frame\ 20.png')`
+document.querySelector('#tuesday').style.backgroundImage = `url('ChooseWeek/Frame\ 25.png')`
+document.querySelector('#wednesday').style.backgroundImage = `url('ChooseWeek/Frame\ 26.png')`
+document.querySelector('#thursday').style.backgroundImage = `url('ChooseWeek/Frame\ 27.png')`
+document.querySelector('#friday').style.backgroundImage = `url('ChooseWeek/Frame\ 28.png')`
+document.querySelector('#saturday').style.backgroundImage = `url('ChooseWeek/Frame\ 29.png')`
+}
+
+if(text.textContent == 'Tuesday'){
+document.querySelector('#monday').style.backgroundImage = `url('ChooseWeek/Frame\ 24.png')`
+document.querySelector('#tuesday').style.backgroundImage = `url('ChooseWeek/Frame\ 19.png')`
+document.querySelector('#wednesday').style.backgroundImage = `url('ChooseWeek/Frame\ 26.png')`
+document.querySelector('#thursday').style.backgroundImage = `url('ChooseWeek/Frame\ 27.png')`
+document.querySelector('#friday').style.backgroundImage = `url('ChooseWeek/Frame\ 28.png')`
+document.querySelector('#saturday').style.backgroundImage = `url('ChooseWeek/Frame\ 29.png')`
+}
+
+if(text.textContent == 'Wednesday'){
+document.querySelector('#monday').style.backgroundImage = `url('ChooseWeek/Frame\ 24.png')`
+document.querySelector('#tuesday').style.backgroundImage = `url('ChooseWeek/Frame\ 25.png')`
+document.querySelector('#wednesday').style.backgroundImage = `url('ChooseWeek/Frame\ 18.png')`
+document.querySelector('#thursday').style.backgroundImage = `url('ChooseWeek/Frame\ 27.png')`
+document.querySelector('#friday').style.backgroundImage = `url('ChooseWeek/Frame\ 28.png')`
+document.querySelector('#saturday').style.backgroundImage = `url('ChooseWeek/Frame\ 29.png')`
+}
+
+if(text.textContent == 'Thursday'){
+document.querySelector('#monday').style.backgroundImage = `url('ChooseWeek/Frame\ 24.png')`
+document.querySelector('#tuesday').style.backgroundImage = `url('ChooseWeek/Frame\ 25.png')`
+document.querySelector('#wednesday').style.backgroundImage = `url('ChooseWeek/Frame\ 26.png')`
+document.querySelector('#thursday').style.backgroundImage = `url('ChooseWeek/Frame\ 21.png')`
+document.querySelector('#friday').style.backgroundImage = `url('ChooseWeek/Frame\ 28.png')`
+document.querySelector('#saturday').style.backgroundImage = `url('ChooseWeek/Frame\ 29.png')`
+}
+
+if(text.textContent == 'Friday'){
+document.querySelector('#monday').style.backgroundImage = `url('ChooseWeek/Frame\ 24.png')`
+document.querySelector('#tuesday').style.backgroundImage = `url('ChooseWeek/Frame\ 25.png')`
+document.querySelector('#wednesday').style.backgroundImage = `url('ChooseWeek/Frame\ 26.png')`
+document.querySelector('#thursday').style.backgroundImage = `url('ChooseWeek/Frame\ 27.png')`
+document.querySelector('#friday').style.backgroundImage = `url('ChooseWeek/Frame\ 22.png')`
+document.querySelector('#saturday').style.backgroundImage = `url('ChooseWeek/Frame\ 29.png')`
+}
+
+if(text.textContent == 'Saturday'){
+document.querySelector('#monday').style.backgroundImage = `url('ChooseWeek/Frame\ 24.png')`
+document.querySelector('#tuesday').style.backgroundImage = `url('ChooseWeek/Frame\ 25.png')`
+document.querySelector('#wednesday').style.backgroundImage = `url('ChooseWeek/Frame\ 26.png')`
+document.querySelector('#thursday').style.backgroundImage = `url('ChooseWeek/Frame\ 27.png')`
+document.querySelector('#friday').style.backgroundImage = `url('ChooseWeek/Frame\ 28.png')`
+document.querySelector('#saturday').style.backgroundImage = `url('ChooseWeek/Frame\ 23.png')`
+}
+
+if(text.textContent == 'Sunday'){
+  today.innerHTML = "07  Sunday"
+}
+      }  
+
+setInterval(AutoWeek, 216000)
+AutoWeek();   
+      
+    </script>
+
+<!-- /T396 --></div><div id="rec484702735" class="r t-rec t-rec_pb_0" style="padding-bottom:0px; " data-animationappear="off" data-record-type="396"><!-- T396 --><style>#rec484702735 .t396__artboard{height: 1px;background-color: #1c1c1c;overflow: visible;}#rec484702735 .t396__filter{height: 1px;}#rec484702735 .t396__carrier{height: 1px;background-position: center center;background-attachment: scroll;background-size:cover;background-repeat:no-repeat;}@media screen and (max-width: 1199px){#rec484702735 .t396__artboard{}#rec484702735 .t396__filter{}#rec484702735 .t396__carrier{background-attachment:scroll;}}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){}#rec484702735 .tn-elem[data-elem-id="1661770706252"]{z-index:1;top: 0px;left: calc(50% - 50px + 0px);width:100%;height:300px;}#rec484702735 .tn-elem[data-elem-id="1661770706252"] .tn-atom{background-color:#1c1c1c;background-position:center center;border-color:transparent;border-style:solid;}@media screen and (max-width: 1199px){}@media screen and (max-width: 959px){}@media screen and (max-width: 639px){}@media screen and (max-width: 479px){#rec484702735 .tn-elem[data-elem-id="1661770706252"]{top: 0px;left: calc(50% - 50px + 0px);}#rec484702735 .tn-elem[data-elem-id="1661770706252"] .tn-atom{background-color:#ffffff;}}</style><div class='t396'><div class="t396__artboard" data-artboard-recid="484702735" data-artboard-height="1" data-artboard-height_vh="" data-artboard-valign="center" data-artboard-ovrflw="visible"> <div class="t396__carrier" data-artboard-recid="484702735"></div> 
+<div class="t396__filter" data-artboard-recid="484702735"></div> 
+<div class='t396__elem tn-elem tn-elem__4847027351661770706252' data-elem-id='1661770706252' data-elem-type='shape' data-field-top-value="0" data-field-top-res-320-value="0" data-field-left-value="0" data-field-left-res-320-value="0" data-field-height-value="300" data-field-width-value="100" data-field-axisy-value="top" data-field-axisx-value="center" data-field-container-value="window" data-field-topunits-value="px" data-field-leftunits-value="px" data-field-heightunits-value="px" data-field-widthunits-value="%"><div class='tn-atom'> </div> </div> </div></div><script>t_onReady(function () {
+t_onFuncLoad('t396_init', function () {
+t396_init('484702735');
+});
+});</script><!-- /T396 --></div></div><!--/allrecords--><!-- Tilda copyright. Don't remove this line --><div class="t-tildalabel t-tildalabel-free" id="tildacopy" data-tilda-sign="5958866#29774318"><div class="t-tildalabel-free__main"><a href="https://tilda.cc/?upm=5958866" target="_blank" style="padding-bottom:12px; display: block;"><img style="width:40px;" src="img/tildacopy.png" fetchpriority="low"></a><div style="padding-bottom: 15px;">This site was made on <a href="https://tilda.cc/?upm=5958866" target="_blank" style="text-decoration: none; color:inherit;">Tilda &mdash; a website builder</a> that helps to&nbsp;create a&nbsp;website without any code</div><a href="https://tilda.cc/registration/" target="_blank" style="display: inline-block; padding: 10px 20px; font-size: 13px; border-radius: 50px; background-color: #fff; color:#000; text-decoration: none;">Create a website</a></div><div class="t-tildalabel-free__links-wr"><a class="t-tildalabel-free__txt-link" href="https://help.tilda.cc/white-label" target="_blank">How to remove this block?</a><a class="t-tildalabel-free__txt-link" href="https://tilda.cc/?upm=5958866" target="_blank">About platform</a><a class="t-tildalabel-free__txt-link" href="https://tilda.cc/abuse/" target="_blank">Submit a complaint</a></div></div><!-- Stat --><script type="text/javascript">if (! window.mainTracker) { window.mainTracker = 'tilda'; }
+window.tildastatcookie='no'; 
+setTimeout(function(){ (function (d, w, k, o, g) { var n=d.getElementsByTagName(o)[0],s=d.createElement(o),f=function(){n.parentNode.insertBefore(s,n);}; s.type = "text/javascript"; s.async = true; s.key = k; s.id = "tildastatscript"; s.src=g; if (w.opera=="[object Opera]") {d.addEventListener("DOMContentLoaded", f, false);} else { f(); } })(document, window, '306ad7b7c3b9684c8666999542622ea3','script','https://static.tildacdn.info/js/tilda-stat-1.0.min.js');
+}, 2000);</script></body></html>
